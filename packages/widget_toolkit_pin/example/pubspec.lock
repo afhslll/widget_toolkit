@@ -170,10 +170,10 @@ packages:
     dependency: transitive
     description:
       name: copy_with_extension
-      sha256: fbcf890b0c34aedf0894f91a11a579994b61b4e04080204656b582708b5b1125
+      sha256: "0447e5ea09845b275fbeaa7605bc85e74da759788678760b2a6c4e06ca622410"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.4"
+    version: "6.0.1"
   crypto:
     dependency: transitive
     description:
@@ -925,7 +925,7 @@ packages:
       path: "../../widget_toolkit"
       relative: true
     source: path
-    version: "0.2.0"
+    version: "0.2.1"
   widget_toolkit_biometrics:
     dependency: "direct main"
     description:
