@@ -18,8 +18,8 @@ abstract class _$CountryModelCWProxy {
   /// CountryModel(...).copyWith(id: 12, name: "My name")
   /// ````
   CountryModel call({
-    String? countryCode,
-    String? countryName,
+    String countryCode,
+    String countryName,
   });
 }
 
@@ -50,16 +50,14 @@ class _$CountryModelCWProxyImpl implements _$CountryModelCWProxy {
     Object? countryName = const $CopyWithPlaceholder(),
   }) {
     return CountryModel(
-      countryCode:
-          countryCode == const $CopyWithPlaceholder() || countryCode == null
-              ? _value.countryCode
-              // ignore: cast_nullable_to_non_nullable
-              : countryCode as String,
-      countryName:
-          countryName == const $CopyWithPlaceholder() || countryName == null
-              ? _value.countryName
-              // ignore: cast_nullable_to_non_nullable
-              : countryName as String,
+      countryCode: countryCode == const $CopyWithPlaceholder()
+          ? _value.countryCode
+          // ignore: cast_nullable_to_non_nullable
+          : countryCode as String,
+      countryName: countryName == const $CopyWithPlaceholder()
+          ? _value.countryName
+          // ignore: cast_nullable_to_non_nullable
+          : countryName as String,
     );
   }
 }

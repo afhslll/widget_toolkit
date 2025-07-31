@@ -20,9 +20,9 @@ abstract class _$SelectedLanguageModelCWProxy {
   /// SelectedLanguageModel(...).copyWith(id: 12, name: "My name")
   /// ````
   SelectedLanguageModel call({
-    LanguageModel? language,
-    bool? selected,
-    bool? isLoading,
+    LanguageModel language,
+    bool selected,
+    bool isLoading,
   });
 }
 
@@ -57,15 +57,15 @@ class _$SelectedLanguageModelCWProxyImpl
     Object? isLoading = const $CopyWithPlaceholder(),
   }) {
     return SelectedLanguageModel(
-      language: language == const $CopyWithPlaceholder() || language == null
+      language: language == const $CopyWithPlaceholder()
           ? _value.language
           // ignore: cast_nullable_to_non_nullable
           : language as LanguageModel,
-      selected: selected == const $CopyWithPlaceholder() || selected == null
+      selected: selected == const $CopyWithPlaceholder()
           ? _value.selected
           // ignore: cast_nullable_to_non_nullable
           : selected as bool,
-      isLoading: isLoading == const $CopyWithPlaceholder() || isLoading == null
+      isLoading: isLoading == const $CopyWithPlaceholder()
           ? _value.isLoading
           // ignore: cast_nullable_to_non_nullable
           : isLoading as bool,

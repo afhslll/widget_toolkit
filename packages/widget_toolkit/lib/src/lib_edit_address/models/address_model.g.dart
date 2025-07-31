@@ -22,10 +22,10 @@ abstract class _$AddressModelCWProxy {
   /// AddressModel(...).copyWith(id: 12, name: "My name")
   /// ````
   AddressModel call({
-    AddressTypeModel? addressType,
-    String? city,
-    String? streetAddress,
-    CountryModel? country,
+    AddressTypeModel addressType,
+    String city,
+    String streetAddress,
+    CountryModel country,
   });
 }
 
@@ -64,21 +64,19 @@ class _$AddressModelCWProxyImpl implements _$AddressModelCWProxy {
     Object? country = const $CopyWithPlaceholder(),
   }) {
     return AddressModel(
-      addressType:
-          addressType == const $CopyWithPlaceholder() || addressType == null
-              ? _value.addressType
-              // ignore: cast_nullable_to_non_nullable
-              : addressType as AddressTypeModel,
-      city: city == const $CopyWithPlaceholder() || city == null
+      addressType: addressType == const $CopyWithPlaceholder()
+          ? _value.addressType
+          // ignore: cast_nullable_to_non_nullable
+          : addressType as AddressTypeModel,
+      city: city == const $CopyWithPlaceholder()
           ? _value.city
           // ignore: cast_nullable_to_non_nullable
           : city as String,
-      streetAddress:
-          streetAddress == const $CopyWithPlaceholder() || streetAddress == null
-              ? _value.streetAddress
-              // ignore: cast_nullable_to_non_nullable
-              : streetAddress as String,
-      country: country == const $CopyWithPlaceholder() || country == null
+      streetAddress: streetAddress == const $CopyWithPlaceholder()
+          ? _value.streetAddress
+          // ignore: cast_nullable_to_non_nullable
+          : streetAddress as String,
+      country: country == const $CopyWithPlaceholder()
           ? _value.country
           // ignore: cast_nullable_to_non_nullable
           : country as CountryModel,

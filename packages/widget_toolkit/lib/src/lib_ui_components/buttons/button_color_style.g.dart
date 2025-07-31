@@ -28,13 +28,13 @@ abstract class _$ButtonColorStyleCWProxy {
   /// ButtonColorStyle(...).copyWith(id: 12, name: "My name")
   /// ````
   ButtonColorStyle call({
-    Color? activeButtonTextColor,
-    Color? disabledButtonTextColor,
-    Color? activeGradientColorStart,
-    Color? activeGradientColorEnd,
-    Color? shadowColor,
-    Color? pressedColor,
-    Color? borderColor,
+    Color activeButtonTextColor,
+    Color disabledButtonTextColor,
+    Color activeGradientColorStart,
+    Color activeGradientColorEnd,
+    Color shadowColor,
+    Color pressedColor,
+    Color borderColor,
   });
 }
 
@@ -91,44 +91,37 @@ class _$ButtonColorStyleCWProxyImpl implements _$ButtonColorStyleCWProxy {
   }) {
     return ButtonColorStyle(
       activeButtonTextColor:
-          activeButtonTextColor == const $CopyWithPlaceholder() ||
-                  activeButtonTextColor == null
+          activeButtonTextColor == const $CopyWithPlaceholder()
               ? _value.activeButtonTextColor
               // ignore: cast_nullable_to_non_nullable
               : activeButtonTextColor as Color,
       disabledButtonTextColor:
-          disabledButtonTextColor == const $CopyWithPlaceholder() ||
-                  disabledButtonTextColor == null
+          disabledButtonTextColor == const $CopyWithPlaceholder()
               ? _value.disabledButtonTextColor
               // ignore: cast_nullable_to_non_nullable
               : disabledButtonTextColor as Color,
       activeGradientColorStart:
-          activeGradientColorStart == const $CopyWithPlaceholder() ||
-                  activeGradientColorStart == null
+          activeGradientColorStart == const $CopyWithPlaceholder()
               ? _value.activeGradientColorStart
               // ignore: cast_nullable_to_non_nullable
               : activeGradientColorStart as Color,
       activeGradientColorEnd:
-          activeGradientColorEnd == const $CopyWithPlaceholder() ||
-                  activeGradientColorEnd == null
+          activeGradientColorEnd == const $CopyWithPlaceholder()
               ? _value.activeGradientColorEnd
               // ignore: cast_nullable_to_non_nullable
               : activeGradientColorEnd as Color,
-      shadowColor:
-          shadowColor == const $CopyWithPlaceholder() || shadowColor == null
-              ? _value.shadowColor
-              // ignore: cast_nullable_to_non_nullable
-              : shadowColor as Color,
-      pressedColor:
-          pressedColor == const $CopyWithPlaceholder() || pressedColor == null
-              ? _value.pressedColor
-              // ignore: cast_nullable_to_non_nullable
-              : pressedColor as Color,
-      borderColor:
-          borderColor == const $CopyWithPlaceholder() || borderColor == null
-              ? _value.borderColor
-              // ignore: cast_nullable_to_non_nullable
-              : borderColor as Color,
+      shadowColor: shadowColor == const $CopyWithPlaceholder()
+          ? _value.shadowColor
+          // ignore: cast_nullable_to_non_nullable
+          : shadowColor as Color,
+      pressedColor: pressedColor == const $CopyWithPlaceholder()
+          ? _value.pressedColor
+          // ignore: cast_nullable_to_non_nullable
+          : pressedColor as Color,
+      borderColor: borderColor == const $CopyWithPlaceholder()
+          ? _value.borderColor
+          // ignore: cast_nullable_to_non_nullable
+          : borderColor as Color,
     );
   }
 }

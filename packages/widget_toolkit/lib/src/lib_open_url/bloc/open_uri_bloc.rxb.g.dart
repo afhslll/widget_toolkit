@@ -1,3 +1,4 @@
+// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -27,14 +28,8 @@ abstract class $OpenUriBloc extends RxBlocBase
       _mapToOnUriClickState();
 
   @override
-  void openURI(
-    String uri, {
-    UriType type = UriType.https,
-  }) =>
-      _$openURIEvent.add((
-        uri: uri,
-        type: type,
-      ));
+  void openURI(String uri, {UriType type = UriType.https}) =>
+      _$openURIEvent.add((uri: uri, type: type));
 
   @override
   ConnectableStream<Result<void>> get onUriClick => _onUriClickState;
