@@ -1,1 +1,1 @@
-enum ButtonStateModel { loading, disabled, enabled, pressed }
+enum ToolkitButtonState { loading, disabled, enabled }
