@@ -50,33 +50,25 @@ class ToolkitButtonStyle {
   }) {
     return ToolkitButtonStyle(
       backgroundColor:
-          backgroundColor ??
-          context.widgetToolkitTheme.buttonStyle.backgroundColor,
+          backgroundColor ?? context.widgetToolkitTheme.buttonBackgroundColor,
       foregroundColor:
-          foregroundColor ??
-          context.widgetToolkitTheme.buttonStyle.foregroundColor,
+          foregroundColor ?? context.widgetToolkitTheme.buttonForegroundColor,
       disabledBackgroundColor:
           disabledBackgroundColor ??
-          context.widgetToolkitTheme.buttonStyle.disabledBackgroundColor,
+          context.widgetToolkitTheme.buttonDisabledBackgroundColor,
       disabledForegroundColor:
           disabledForegroundColor ??
-          context.widgetToolkitTheme.buttonStyle.disabledForegroundColor,
-      startGradientColor:
-          startGradientColor ??
-          context.widgetToolkitTheme.buttonStyle.startGradientColor,
-      endGradientColor:
-          endGradientColor ??
-          context.widgetToolkitTheme.buttonStyle.endGradientColor,
-      borderColor:
-          borderColor ?? context.widgetToolkitTheme.buttonStyle.borderColor,
-      shadowColor:
-          shadowColor ?? context.widgetToolkitTheme.buttonStyle.shadowColor,
+          context.widgetToolkitTheme.buttonDisabledForegroundColor,
+      startGradientColor: startGradientColor,
+      endGradientColor: endGradientColor,
+      borderColor: borderColor ?? context.widgetToolkitTheme.buttonBorderColor,
+      shadowColor: shadowColor ?? context.widgetToolkitTheme.buttonShadowColor,
       borderRadius:
-          borderRadius ?? context.widgetToolkitTheme.buttonStyle.borderRadius,
-      textStyle: textStyle ?? context.widgetToolkitTheme.buttonStyle.textStyle,
-      elevation: elevation ?? context.widgetToolkitTheme.buttonStyle.elevation,
-      padding: padding ?? context.widgetToolkitTheme.buttonStyle.padding,
-      iconSize: iconSize ?? context.widgetToolkitTheme.buttonStyle.iconSize,
+          borderRadius ?? context.widgetToolkitTheme.buttonBorderRadius,
+      textStyle: textStyle ?? context.widgetToolkitTheme.buttonTextStyle,
+      elevation: elevation ?? context.widgetToolkitTheme.buttonElevation,
+      padding: padding ?? context.widgetToolkitTheme.buttonPadding,
+      iconSize: iconSize ?? context.widgetToolkitTheme.buttonIconSize,
     );
   }
 }

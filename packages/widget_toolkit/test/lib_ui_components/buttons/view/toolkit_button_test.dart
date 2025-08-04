@@ -6,26 +6,40 @@ import '../../../helpers/golden_helper.dart';
 void main() {
   runUiComponentGoldenTests(
     scenario: 'toolkit_button_test',
-    size: const Size(400, 100),
+    size: const Size(450, 100),
     scenarioPadding: const EdgeInsets.all(16),
     children: [
       ToolkitButton(
-        text: 'Gradient button',
-        leadingIcon: Icons.add,
-        style: ToolkitButtonStyle(
-          startGradientColor: Colors.purple,
-          endGradientColor: Colors.teal,
-        ),
+        text: 'Disabled button',
         onPressed: () {},
+        state: ToolkitButtonState.disabled,
+        style: ToolkitButtonStyle(
+          disabledBackgroundColor: Colors.grey.shade300,
+          disabledForegroundColor: Colors.grey.shade700,
+          borderRadius: 40.0,
+        ),
       ),
       ToolkitButton(
-        text: 'Filled button',
-        trailingIcon: Icons.add,
-        style: ToolkitButtonStyle(backgroundColor: Colors.pink),
+        text: 'Loading button',
         onPressed: () {},
+        state: ToolkitButtonState.loading,
       ),
-      ToolkitButton(text: 'Disabled button'),
-      ToolkitButton(text: 'Loading button', state: ToolkitButtonState.loading),
+      ToolkitButton(
+        text: 'Filled button with icon',
+        onPressed: () {},
+        leadingIcon: Icons.add,
+        style: ToolkitButtonStyle(foregroundColor: Colors.yellow),
+      ),
+      ToolkitButton(
+        text: 'Gradient button',
+        leadingIcon: Icons.add,
+        onPressed: () {},
+        style: ToolkitButtonStyle(
+          startGradientColor: Colors.blue,
+          endGradientColor: Colors.green,
+          shadowColor: Colors.blue,
+        ),
+      ),
     ],
   );
 }

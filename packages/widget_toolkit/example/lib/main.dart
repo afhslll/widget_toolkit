@@ -16,7 +16,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(extensions: [WidgetToolkitTheme.light()]),
+      theme: ThemeData(extensions: [WidgetToolkitTheme.light().copyWith()]),
       darkTheme: ThemeData(extensions: [WidgetToolkitTheme.dark()]),
       themeMode: ThemeMode.system,
       home: Scaffold(
@@ -27,8 +27,9 @@ class _MyAppState extends State<MyApp> {
             spacing: 16,
             children: [
               ToolkitButton(
-                text: 'Disabled Button',
-                onPressed: null,
+                text: 'Disabled button',
+                onPressed: () {},
+                state: ToolkitButtonState.disabled,
                 style: ToolkitButtonStyle(
                   disabledBackgroundColor: Colors.grey.shade300,
                   disabledForegroundColor: Colors.grey.shade700,
@@ -36,18 +37,18 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
               ToolkitButton(
-                text: 'Press Me with Icon',
-                leadingIcon: Icons.add,
+                text: 'Loading button',
+                onPressed: () {},
                 state: ToolkitButtonState.loading,
               ),
               ToolkitButton(
-                leadingIcon: Icons.add,
-                text: 'Press Me',
+                text: 'Filled button with icon',
                 onPressed: () {},
+                leadingIcon: Icons.add,
                 style: ToolkitButtonStyle(foregroundColor: Colors.yellow),
               ),
               ToolkitButton(
-                text: 'Press Me',
+                text: 'Gradient button',
                 leadingIcon: Icons.add,
                 onPressed: () {},
                 style: ToolkitButtonStyle(

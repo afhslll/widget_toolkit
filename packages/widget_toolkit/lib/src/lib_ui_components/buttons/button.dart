@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../widget_toolkit.dart';
-import '../sized_loading_indicator.dart';
 
 const _transparent = Color(0x00ffffff);
 
@@ -9,19 +8,19 @@ class ToolkitButton extends StatefulWidget {
   const ToolkitButton({
     super.key,
     required this.text,
+    required this.onPressed,
     this.leadingIcon,
     this.trailingIcon,
-    this.onPressed,
     this.style,
-    this.state,
+    this.state = ToolkitButtonState.enabled,
   });
 
   final String text;
   final IconData? leadingIcon;
   final IconData? trailingIcon;
   final ToolkitButtonStyle? style;
-  final ToolkitButtonState? state;
-  final VoidCallback? onPressed;
+  final ToolkitButtonState state;
+  final VoidCallback onPressed;
 
   @override
   State<ToolkitButton> createState() => _ToolkitButtonState();
@@ -38,7 +37,7 @@ class _ToolkitButtonState extends State<ToolkitButton> {
   void initState() {
     super.initState();
     _statesController = WidgetStatesController({
-      if (widget.onPressed == null) WidgetState.disabled,
+      if (widget.state != ToolkitButtonState.enabled) WidgetState.disabled,
     });
     _duration = WidgetStateProperty.resolveWith((state) {
       if (state.contains(WidgetState.pressed)) {
@@ -74,24 +73,23 @@ class _ToolkitButtonState extends State<ToolkitButton> {
       backgroundColor: WidgetStateProperty.resolveWith((state) {
         if (state.contains(WidgetState.disabled)) {
           return widget.style?.disabledBackgroundColor ??
-              context.widgetToolkitTheme.buttonStyle.disabledBackgroundColor;
+              context.widgetToolkitTheme.buttonDisabledBackgroundColor;
         }
         return widget.style?.backgroundColor ??
-            context.widgetToolkitTheme.buttonStyle.backgroundColor;
+            context.widgetToolkitTheme.buttonBackgroundColor;
       }),
       foregroundColor: WidgetStateProperty.resolveWith((state) {
         if (state.contains(WidgetState.disabled)) {
           return widget.style?.disabledForegroundColor ??
-              context.widgetToolkitTheme.buttonStyle.disabledForegroundColor;
+              context.widgetToolkitTheme.buttonDisabledForegroundColor;
         }
         return widget.style?.foregroundColor ??
-            context.widgetToolkitTheme.buttonStyle.foregroundColor;
+            context.widgetToolkitTheme.buttonForegroundColor;
       }),
       elevation: WidgetStateProperty.resolveWith((state) {
         final elevation =
             widget.style?.elevation ??
-            context.widgetToolkitTheme.buttonStyle.elevation ??
-            0;
+            context.widgetToolkitTheme.buttonElevation;
         if (state.contains(WidgetState.disabled)) {
           return 0.0;
         } else if (state.contains(WidgetState.pressed)) {
@@ -101,7 +99,7 @@ class _ToolkitButtonState extends State<ToolkitButton> {
       }),
       shadowColor: WidgetStatePropertyAll(
         widget.style?.shadowColor ??
-            context.widgetToolkitTheme.buttonStyle.shadowColor,
+            context.widgetToolkitTheme.buttonShadowColor,
       ),
     );
   }
@@ -149,23 +147,18 @@ class _ToolkitButtonState extends State<ToolkitButton> {
   Widget _child(BuildContext context) {
     return Padding(
       padding:
-          widget.style?.padding ??
-          context.widgetToolkitTheme.buttonStyle.padding ??
-          EdgeInsets.zero,
+          widget.style?.padding ?? context.widgetToolkitTheme.buttonPadding,
       child: widget.state == ToolkitButtonState.loading
           ? SizedBox(
               width: double.infinity,
               height:
                   widget.style?.iconSize ??
-                  context.widgetToolkitTheme.buttonStyle.iconSize,
+                  context.widgetToolkitTheme.buttonIconSize,
               child: Center(
                 child: SizedLoadingIndicator.textButtonValue(
                   color:
                       widget.style?.disabledForegroundColor ??
-                      context
-                          .widgetToolkitTheme
-                          .buttonStyle
-                          .disabledForegroundColor,
+                      context.widgetToolkitTheme.buttonDisabledForegroundColor,
                 ),
               ),
             )
@@ -179,15 +172,15 @@ class _ToolkitButtonState extends State<ToolkitButton> {
                       widget.leadingIcon,
                       size:
                           widget.style?.iconSize ??
-                          context.widgetToolkitTheme.buttonStyle.iconSize,
+                          context.widgetToolkitTheme.buttonIconSize,
                     ),
                   ),
                 Text(
                   widget.text,
                   style:
                       (widget.style?.textStyle ??
-                              context.widgetToolkitTheme.buttonStyle.textStyle)
-                          ?.copyWith(height: 0),
+                              context.widgetToolkitTheme.buttonTextStyle)
+                          .copyWith(height: 0),
                 ),
                 if (widget.trailingIcon != null)
                   Padding(
@@ -196,7 +189,7 @@ class _ToolkitButtonState extends State<ToolkitButton> {
                       widget.trailingIcon,
                       size:
                           widget.style?.iconSize ??
-                          context.widgetToolkitTheme.buttonStyle.iconSize,
+                          context.widgetToolkitTheme.buttonIconSize,
                     ),
                   ),
               ],
@@ -219,7 +212,9 @@ class _ToolkitButtonState extends State<ToolkitButton> {
         );
       },
       child: ElevatedButton(
-        onPressed: widget.onPressed,
+        onPressed: widget.state == ToolkitButtonState.enabled
+            ? widget.onPressed
+            : null,
         statesController: _statesController,
         style: _noBackgroundStyle(context),
         child: _child(context),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:theme_tailor_annotation/theme_tailor_annotation.dart';
 
-import '../../lib_ui_components/buttons/button_style.dart';
 import 'design_system/design_system_spacings.dart';
+import 'design_system/design_system_typography.dart';
 import 'design_system/widget_toolkit_design_system.dart';
 
 part 'widget_toolkit_theme.tailor.dart';
@@ -13,57 +13,172 @@ class WidgetToolkitTheme extends ThemeExtension<WidgetToolkitTheme>
   @override
   final DesignSystemSpacings spacings;
   @override
-  final ToolkitButtonStyle buttonStyle;
+  final DesignSystemTypography typography;
   @override
   final Color loadingIndicatorColor;
+  // Start region - button
+  @override
+  final Color buttonBackgroundColor;
+  @override
+  final Color buttonForegroundColor;
+  @override
+  final Color buttonDisabledBackgroundColor;
+  @override
+  final Color buttonDisabledForegroundColor;
+  @override
+  final Color buttonBorderColor;
+  @override
+  final Color buttonShadowColor;
+  @override
+  final double buttonBorderRadius;
+  @override
+  final TextStyle buttonTextStyle;
+  @override
+  final double buttonElevation;
+  @override
+  final EdgeInsetsGeometry buttonPadding;
+  @override
+  final double buttonIconSize;
+  // End region - button
+  // Start region - shimmer
+  @override
+  final Color shimmerBaseColor;
+  @override
+  final Color shimmerHighlightColor;
+  // End region - shimmer
+  // Start region - error card
+  @override
+  final Color errorCardBackgroundColor;
+  @override
+  final Color errorCardIconColor;
+  @override
+  final Color errorCardTextColor;
+  // End region - error card
+  // Start region - bottom sheet
+  @override
+  final Color bottomSheetBarrierColor;
+  @override
+  final Color bottomSheetBackgroundColor;
+  @override
+  final EdgeInsetsGeometry bottomSheetContentPadding;
+  @override
+  final Color bottomSheetLineColor;
+  @override
+  final EdgeInsetsGeometry bottomSheetHeaderPadding;
+  @override
+  final double bottomSheetBottomHeight;
+  // End region - bottom sheet
 
   const WidgetToolkitTheme({
-    required this.buttonStyle,
+    required this.typography,
+    required this.buttonBackgroundColor,
+    required this.buttonForegroundColor,
+    required this.buttonDisabledBackgroundColor,
+    required this.buttonDisabledForegroundColor,
+    required this.buttonBorderColor,
+    required this.buttonShadowColor,
+    required this.buttonBorderRadius,
+    required this.buttonTextStyle,
+    required this.buttonElevation,
+    required this.buttonPadding,
+    required this.buttonIconSize,
     required this.spacings,
     required this.loadingIndicatorColor,
+    required this.shimmerBaseColor,
+    required this.shimmerHighlightColor,
+    required this.errorCardBackgroundColor,
+    required this.errorCardIconColor,
+    required this.errorCardTextColor,
+    required this.bottomSheetBarrierColor,
+    required this.bottomSheetBackgroundColor,
+    required this.bottomSheetContentPadding,
+    required this.bottomSheetLineColor,
+    required this.bottomSheetHeaderPadding,
+    required this.bottomSheetBottomHeight,
   });
 
   WidgetToolkitTheme.light()
     : spacings = WidgetToolkitDesignSystem.light().spacings,
-      buttonStyle = ToolkitButtonStyle(
-        backgroundColor: WidgetToolkitDesignSystem.light().colors.primary,
-        foregroundColor: WidgetToolkitDesignSystem.light().colors.onPrimary,
-        disabledBackgroundColor:
-            WidgetToolkitDesignSystem.light().colors.neutral80,
-        disabledForegroundColor:
-            WidgetToolkitDesignSystem.light().colors.neutral40,
-        borderColor: WidgetToolkitDesignSystem.light().colors.primary,
-        shadowColor: WidgetToolkitDesignSystem.light().colors.primary,
-        borderRadius: 10.0,
-        textStyle: WidgetToolkitDesignSystem.light().typography.titleMedM,
-        elevation: 32.0,
-        padding: EdgeInsets.symmetric(
-          vertical: WidgetToolkitDesignSystem.light().spacings.s,
-        ),
-        iconSize: WidgetToolkitDesignSystem.light().spacings.l,
+      typography = WidgetToolkitDesignSystem.light().typography,
+      buttonBackgroundColor = WidgetToolkitDesignSystem.light().colors.primary,
+      buttonForegroundColor =
+          WidgetToolkitDesignSystem.light().colors.onPrimary,
+      buttonDisabledBackgroundColor =
+          WidgetToolkitDesignSystem.light().colors.neutral80,
+      buttonDisabledForegroundColor =
+          WidgetToolkitDesignSystem.light().colors.neutral40,
+      buttonBorderColor = WidgetToolkitDesignSystem.light().colors.primary,
+      buttonShadowColor = WidgetToolkitDesignSystem.light().colors.primary,
+      buttonBorderRadius = 10.0,
+      buttonTextStyle = WidgetToolkitDesignSystem.light().typography.titleMedM,
+      buttonElevation = 32.0,
+      buttonPadding = EdgeInsets.symmetric(
+        vertical: WidgetToolkitDesignSystem.light().spacings.s,
       ),
+      buttonIconSize = WidgetToolkitDesignSystem.light().spacings.l,
       loadingIndicatorColor =
-          WidgetToolkitDesignSystem.light().colors.onPrimary;
+          WidgetToolkitDesignSystem.light().colors.onPrimary,
+      shimmerBaseColor =
+          WidgetToolkitDesignSystem.light().colors.primaryContainer,
+      shimmerHighlightColor = WidgetToolkitDesignSystem.light().colors.primary,
+      errorCardBackgroundColor =
+          WidgetToolkitDesignSystem.light().colors.surface,
+      errorCardIconColor = WidgetToolkitDesignSystem.light().colors.error,
+      errorCardTextColor = WidgetToolkitDesignSystem.light().colors.onSurface,
+      bottomSheetBarrierColor =
+          WidgetToolkitDesignSystem.light().colors.transparent,
+      bottomSheetBackgroundColor =
+          WidgetToolkitDesignSystem.light().colors.surface,
+      bottomSheetContentPadding = EdgeInsets.all(
+        WidgetToolkitDesignSystem.light().spacings.m,
+      ),
+      bottomSheetLineColor = WidgetToolkitDesignSystem.light().colors.neutral40,
+      bottomSheetHeaderPadding = EdgeInsets.symmetric(
+        horizontal: WidgetToolkitDesignSystem.light().spacings.m,
+        vertical: WidgetToolkitDesignSystem.light().spacings.s,
+      ),
+      bottomSheetBottomHeight = WidgetToolkitDesignSystem.light().spacings.m;
 
   WidgetToolkitTheme.dark()
     : spacings = WidgetToolkitDesignSystem.dark().spacings,
-      buttonStyle = ToolkitButtonStyle(
-        backgroundColor: WidgetToolkitDesignSystem.dark().colors.primary,
-        foregroundColor: WidgetToolkitDesignSystem.dark().colors.onPrimary,
-        disabledBackgroundColor:
-            WidgetToolkitDesignSystem.dark().colors.neutral80,
-        disabledForegroundColor: WidgetToolkitDesignSystem.dark().colors.white,
-        borderColor: WidgetToolkitDesignSystem.dark().colors.primary,
-        shadowColor: WidgetToolkitDesignSystem.dark().colors.primary,
-        borderRadius: 10.0,
-        textStyle: WidgetToolkitDesignSystem.dark().typography.titleMedM,
-        elevation: 32.0,
-        padding: EdgeInsets.symmetric(
-          vertical: WidgetToolkitDesignSystem.dark().spacings.s,
-        ),
-        iconSize: WidgetToolkitDesignSystem.dark().spacings.l,
+      typography = WidgetToolkitDesignSystem.dark().typography,
+      buttonBackgroundColor = WidgetToolkitDesignSystem.dark().colors.primary,
+      buttonForegroundColor = WidgetToolkitDesignSystem.dark().colors.onPrimary,
+      buttonDisabledBackgroundColor =
+          WidgetToolkitDesignSystem.dark().colors.neutral80,
+      buttonDisabledForegroundColor =
+          WidgetToolkitDesignSystem.dark().colors.white,
+      buttonBorderColor = WidgetToolkitDesignSystem.dark().colors.primary,
+      buttonShadowColor = WidgetToolkitDesignSystem.dark().colors.primary,
+      buttonBorderRadius = 10.0,
+      buttonTextStyle = WidgetToolkitDesignSystem.dark().typography.titleMedM,
+      buttonElevation = 32.0,
+      buttonPadding = EdgeInsets.symmetric(
+        vertical: WidgetToolkitDesignSystem.dark().spacings.s,
       ),
-      loadingIndicatorColor = WidgetToolkitDesignSystem.dark().colors.onPrimary;
+      buttonIconSize = WidgetToolkitDesignSystem.dark().spacings.l,
+      loadingIndicatorColor = WidgetToolkitDesignSystem.dark().colors.onPrimary,
+      shimmerBaseColor =
+          WidgetToolkitDesignSystem.dark().colors.primaryContainer,
+      shimmerHighlightColor = WidgetToolkitDesignSystem.dark().colors.primary,
+      errorCardBackgroundColor =
+          WidgetToolkitDesignSystem.dark().colors.surface,
+      errorCardIconColor = WidgetToolkitDesignSystem.dark().colors.error,
+      errorCardTextColor = WidgetToolkitDesignSystem.dark().colors.onSurface,
+
+      bottomSheetBarrierColor =
+          WidgetToolkitDesignSystem.dark().colors.transparent,
+      bottomSheetBackgroundColor =
+          WidgetToolkitDesignSystem.dark().colors.surface,
+      bottomSheetContentPadding = EdgeInsets.all(
+        WidgetToolkitDesignSystem.dark().spacings.m,
+      ),
+      bottomSheetLineColor = WidgetToolkitDesignSystem.dark().colors.neutral40,
+      bottomSheetHeaderPadding = EdgeInsets.symmetric(
+        horizontal: WidgetToolkitDesignSystem.dark().spacings.m,
+        vertical: WidgetToolkitDesignSystem.dark().spacings.s,
+      ),
+      bottomSheetBottomHeight = WidgetToolkitDesignSystem.dark().spacings.m;
 }
 
 extension ThemeContextExtension on BuildContext {

@@ -88,6 +88,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_rx_bloc:
+    dependency: transitive
+    description:
+      name: flutter_rx_bloc
+      sha256: a4ac7c181e9d5bf16197317f31e72610a0379e8abdc65ad084cff4e8dfb8f101
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -175,6 +183,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.16.0"
+  nested:
+    dependency: transitive
+    description:
+      name: nested
+      sha256: "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   path:
     dependency: transitive
     description:
@@ -207,6 +223,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.3"
+  provider:
+    dependency: transitive
+    description:
+      name: provider
+      sha256: "4abbd070a04e9ddc287673bf5a030c7ca8b685ff70218720abab8b092f53dd84"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.1.5"
+  rx_bloc:
+    dependency: transitive
+    description:
+      name: rx_bloc
+      sha256: "11398dd708534765121245e15e635bd7800c5ed722a8b4673aab6f840f8bf0e0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.1"
+  rxdart:
+    dependency: transitive
+    description:
+      name: rxdart
+      sha256: "5c3004a4a8dbb94bd4bf5412a4def4acdaa12e12f269737a5751369e12d1a962"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.28.0"
+  shimmer:
+    dependency: transitive
+    description:
+      name: shimmer
+      sha256: "5f88c883a22e9f9f299e5ba0e4f7e6054857224976a5d9f839d4ebdc94a14ac9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
