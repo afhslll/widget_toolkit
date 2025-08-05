@@ -94,7 +94,7 @@ class _ItemPickerPageState<T extends PickerItemModel>
       : const SizedBox.shrink();
 
   Widget _buildContent() => Flexible(
-    child: RxResultBuilder<ItemPickerBlocType, List>(
+    child: RxResultBuilder<ItemPickerBlocType<T>, List<T>>(
       state: (bloc) => bloc.states.items,
       buildError: (context, error, bloc) => Padding(
         padding: context.itemPickerTheme.errorPadding,
@@ -113,14 +113,14 @@ class _ItemPickerPageState<T extends PickerItemModel>
                   widget.emptyBuilder?.call() ??
                   const ErrorCardWidget(text: 'No items'),
             )
-          : _buildList(list as List<T>),
+          : _buildList(list),
       buildLoading: (context, bloc) => widget.isStatic
           ? const SizedBox.shrink()
           : _buildList([], isLoading: true),
     ),
   );
 
-  Widget _buildFooter() => RxResultBuilder<ItemPickerBlocType, List>(
+  Widget _buildFooter() => RxResultBuilder<ItemPickerBlocType<T>, List<T>>(
     state: (bloc) => bloc.states.items,
     buildError: (context, error, bloc) => _buildFooterButtons(),
     buildSuccess: (context, list, bloc) => _buildFooterButtons(),

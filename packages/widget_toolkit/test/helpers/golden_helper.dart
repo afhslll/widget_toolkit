@@ -2,7 +2,7 @@ import 'package:alchemist/alchemist.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:widget_toolkit/src/base/theme/widget_toolkit_theme.dart';
+import 'package:widget_toolkit/widget_toolkit.dart';
 
 import 'enums/app_themes.dart';
 import 'enums/golden_alignment.dart';
@@ -183,8 +183,12 @@ Future<void> pumpDeviceBuilderWithLocalizationsAndTheme(
 
 ThemeData getThemeData(bool inLightMode) {
   final theme = inLightMode
-      ? ThemeData.light().copyWith(extensions: [WidgetToolkitTheme.light()])
-      : ThemeData.dark().copyWith(extensions: [WidgetToolkitTheme.dark()]);
+      ? ThemeData.light().copyWith(
+          extensions: [WidgetToolkitTheme.light(), ItemPickerTheme.light()],
+        )
+      : ThemeData.dark().copyWith(
+          extensions: [WidgetToolkitTheme.dark(), ItemPickerTheme.dark()],
+        );
   return theme;
 }
 
