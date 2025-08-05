@@ -59,12 +59,12 @@ class ItemPickerTheme extends ThemeExtension<ItemPickerTheme>
         top: WidgetToolkitDesignSystem.light().spacings.m,
       ),
       itemOuterPadding = EdgeInsets.symmetric(
-        vertical: WidgetToolkitDesignSystem.light().spacings.s,
-        horizontal: WidgetToolkitDesignSystem.light().spacings.m,
+        vertical: WidgetToolkitDesignSystem.light().spacings.xss1,
+        horizontal: WidgetToolkitDesignSystem.light().spacings.s,
       ),
       itemInnerPadding = EdgeInsets.symmetric(
-        vertical: WidgetToolkitDesignSystem.light().spacings.s,
-        horizontal: WidgetToolkitDesignSystem.light().spacings.m,
+        vertical: WidgetToolkitDesignSystem.light().spacings.xs,
+        horizontal: WidgetToolkitDesignSystem.light().spacings.s,
       ),
       itemSelectedColor =
           WidgetToolkitDesignSystem.light().colors.primaryContainer,
@@ -84,12 +84,12 @@ class ItemPickerTheme extends ThemeExtension<ItemPickerTheme>
         top: WidgetToolkitDesignSystem.dark().spacings.m,
       ),
       itemOuterPadding = EdgeInsets.symmetric(
-        vertical: WidgetToolkitDesignSystem.dark().spacings.s,
-        horizontal: WidgetToolkitDesignSystem.dark().spacings.m,
+        vertical: WidgetToolkitDesignSystem.dark().spacings.xss1,
+        horizontal: WidgetToolkitDesignSystem.dark().spacings.s,
       ),
       itemInnerPadding = EdgeInsets.symmetric(
-        vertical: WidgetToolkitDesignSystem.dark().spacings.s,
-        horizontal: WidgetToolkitDesignSystem.dark().spacings.m,
+        vertical: WidgetToolkitDesignSystem.dark().spacings.xs,
+        horizontal: WidgetToolkitDesignSystem.dark().spacings.s,
       ),
       itemSelectedColor =
           WidgetToolkitDesignSystem.dark().colors.primaryContainer,

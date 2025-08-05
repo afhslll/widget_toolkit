@@ -29,7 +29,7 @@ class ShimmerWrapper extends StatelessWidget {
     required this.child,
     required this.showShimmer,
     this.alignment = Alignment.centerLeft,
-    this.radius = 0,
+    this.radius,
     this.fadeTransition = true,
     this.baseColor,
     this.highlightColor,
@@ -46,7 +46,7 @@ class ShimmerWrapper extends StatelessWidget {
   final AlignmentGeometry? alignment;
 
   /// The border radius of the widget
-  final double radius;
+  final double? radius;
 
   /// Base shimmer color
   final Color? baseColor;
@@ -76,7 +76,9 @@ class ShimmerWrapper extends StatelessWidget {
       return Container(
         key: ShimmerWrapper.shimmerContainerKey,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(radius)),
+          borderRadius: BorderRadius.circular(
+            radius ?? context.widgetToolkitTheme.shimmerBorderRadius,
+          ),
         ),
         alignment: alignment,
         child: Shimmer.fromColors(

@@ -48,6 +48,8 @@ class WidgetToolkitTheme extends ThemeExtension<WidgetToolkitTheme>
   final Color shimmerBaseColor;
   @override
   final Color shimmerHighlightColor;
+  @override
+  final double shimmerBorderRadius;
   // End region - shimmer
   // Start region - error card
   @override
@@ -92,6 +94,7 @@ class WidgetToolkitTheme extends ThemeExtension<WidgetToolkitTheme>
     required this.loadingIndicatorColor,
     required this.shimmerBaseColor,
     required this.shimmerHighlightColor,
+    required this.shimmerBorderRadius,
     required this.errorCardBackgroundColor,
     required this.errorCardIconColor,
     required this.errorCardTextColor,
@@ -117,7 +120,7 @@ class WidgetToolkitTheme extends ThemeExtension<WidgetToolkitTheme>
           WidgetToolkitDesignSystem.light().colors.neutral40,
       buttonBorderColor = WidgetToolkitDesignSystem.light().colors.primary,
       buttonShadowColor = WidgetToolkitDesignSystem.light().colors.primary,
-      buttonBorderRadius = 10.0,
+      buttonBorderRadius = WidgetToolkitDesignSystem.light().spacings.s,
       buttonTextStyle = WidgetToolkitDesignSystem.light().typography.titleMedM,
       buttonElevation = 32.0,
       buttonPadding = EdgeInsets.symmetric(
@@ -129,6 +132,7 @@ class WidgetToolkitTheme extends ThemeExtension<WidgetToolkitTheme>
       shimmerBaseColor =
           WidgetToolkitDesignSystem.light().colors.primaryContainer,
       shimmerHighlightColor = WidgetToolkitDesignSystem.light().colors.primary,
+      shimmerBorderRadius = WidgetToolkitDesignSystem.light().spacings.xs,
       errorCardBackgroundColor =
           WidgetToolkitDesignSystem.light().colors.surface,
       errorCardIconColor = WidgetToolkitDesignSystem.light().colors.error,
@@ -159,7 +163,8 @@ class WidgetToolkitTheme extends ThemeExtension<WidgetToolkitTheme>
           WidgetToolkitDesignSystem.dark().colors.white,
       buttonBorderColor = WidgetToolkitDesignSystem.dark().colors.primary,
       buttonShadowColor = WidgetToolkitDesignSystem.dark().colors.primary,
-      buttonBorderRadius = 10.0,
+      buttonBorderRadius = WidgetToolkitDesignSystem.dark().spacings.s,
+      shimmerBorderRadius = WidgetToolkitDesignSystem.dark().spacings.xs,
       buttonTextStyle = WidgetToolkitDesignSystem.dark().typography.titleMedM,
       buttonElevation = 32.0,
       buttonPadding = EdgeInsets.symmetric(

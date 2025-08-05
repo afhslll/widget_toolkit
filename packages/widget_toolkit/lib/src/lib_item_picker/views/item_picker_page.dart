@@ -177,10 +177,7 @@ class _ItemPickerPageState<T extends PickerItemModel>
             ToolkitButton(
               state: _saveState(isLoading: isLoading),
               text: widget.saveButtonText ?? 'Save',
-              onPressed: () =>
-                  _saveState(isLoading: isLoading) == ToolkitButtonState.enabled
-                  ? widget.onTap(selectedItems)
-                  : null,
+              onPressed: () => widget.onTap(selectedItems),
             ),
         ],
       ),

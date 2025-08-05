@@ -27,7 +27,7 @@ class ToolkitButton extends StatefulWidget {
 }
 
 class _ToolkitButtonState extends State<ToolkitButton> {
-  late WidgetStatesController _statesController;
+  final WidgetStatesController _statesController = WidgetStatesController();
   late WidgetStateProperty<Matrix4> _transform;
   late WidgetStateProperty<Duration> _duration;
   late WidgetStateProperty<Curve> _curve;
@@ -35,10 +35,6 @@ class _ToolkitButtonState extends State<ToolkitButton> {
 
   @override
   void initState() {
-    super.initState();
-    _statesController = WidgetStatesController({
-      if (widget.state != ToolkitButtonState.enabled) WidgetState.disabled,
-    });
     _duration = WidgetStateProperty.resolveWith((state) {
       if (state.contains(WidgetState.pressed)) {
         return const Duration(milliseconds: 200);
@@ -66,6 +62,29 @@ class _ToolkitButtonState extends State<ToolkitButton> {
         ),
       );
     }
+    _updateButtonState();
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant ToolkitButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.state != widget.state) {
+      _updateButtonState();
+    }
+  }
+
+  void _updateButtonState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final states = Set<WidgetState>.from(_statesController.value);
+      if (widget.state == ToolkitButtonState.enabled) {
+        states.remove(WidgetState.disabled);
+      } else {
+        states.add(WidgetState.disabled);
+      }
+      _statesController.value = states;
+    });
   }
 
   ButtonStyle _fallbackStyle(BuildContext context) {
@@ -119,7 +138,8 @@ class _ToolkitButtonState extends State<ToolkitButton> {
     final buttonStyle = _fallbackStyle(context);
     BoxShape shape = BoxShape.rectangle;
     BorderRadius borderRadius = BorderRadius.circular(
-      widget.style?.borderRadius ?? 8.0,
+      widget.style?.borderRadius ??
+          context.widgetToolkitTheme.buttonBorderRadius,
     );
     BoxShadow? shadow;
     final elevation = buttonStyle.elevation?.resolve(value);
@@ -212,9 +232,7 @@ class _ToolkitButtonState extends State<ToolkitButton> {
         );
       },
       child: ElevatedButton(
-        onPressed: widget.state == ToolkitButtonState.enabled
-            ? widget.onPressed
-            : null,
+        onPressed: widget.onPressed,
         statesController: _statesController,
         style: _noBackgroundStyle(context),
         child: _child(context),

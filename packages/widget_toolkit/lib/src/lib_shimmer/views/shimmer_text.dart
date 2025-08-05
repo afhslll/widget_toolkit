@@ -81,22 +81,25 @@ class ShimmerText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ShimmerWrapper(
-        showShimmer: text == null,
-        alignment: alignment,
-        fadeTransition: false,
-        baseColor: baseColor,
-        highlightColor: highlightColor,
-        child: _buildChild(context),
-      );
+    showShimmer: text == null,
+    alignment: alignment,
+    fadeTransition: false,
+    baseColor: baseColor,
+    highlightColor: highlightColor,
+    radius: borderRadius,
+    child: _buildChild(context),
+  );
 
   Widget _buildChild(BuildContext context) {
     if (text != null) {
-      return Text(text!,
-          style: style,
-          maxLines: maxLines,
-          overflow: overflow,
-          textAlign: textAlign,
-          textHeightBehavior: textHeightBehavior);
+      return Text(
+        text!,
+        style: style,
+        maxLines: maxLines,
+        overflow: overflow,
+        textAlign: textAlign,
+        textHeightBehavior: textHeightBehavior,
+      );
     }
 
     final type = this.type ?? ShimmerType.random();
@@ -120,6 +123,7 @@ class ShimmerText extends StatelessWidget {
         overflow: overflow,
         shimmerTypeRandom: type,
         alignment: alignment,
+        borderRadius: borderRadius,
       );
     }
 

@@ -27,6 +27,7 @@ mixin _$WidgetToolkitThemeTailorMixin on ThemeExtension<WidgetToolkitTheme> {
   double get buttonIconSize;
   Color get shimmerBaseColor;
   Color get shimmerHighlightColor;
+  double get shimmerBorderRadius;
   Color get errorCardBackgroundColor;
   Color get errorCardIconColor;
   Color get errorCardTextColor;
@@ -57,6 +58,7 @@ mixin _$WidgetToolkitThemeTailorMixin on ThemeExtension<WidgetToolkitTheme> {
     double? buttonIconSize,
     Color? shimmerBaseColor,
     Color? shimmerHighlightColor,
+    double? shimmerBorderRadius,
     Color? errorCardBackgroundColor,
     Color? errorCardIconColor,
     Color? errorCardTextColor,
@@ -92,6 +94,7 @@ mixin _$WidgetToolkitThemeTailorMixin on ThemeExtension<WidgetToolkitTheme> {
       shimmerBaseColor: shimmerBaseColor ?? this.shimmerBaseColor,
       shimmerHighlightColor:
           shimmerHighlightColor ?? this.shimmerHighlightColor,
+      shimmerBorderRadius: shimmerBorderRadius ?? this.shimmerBorderRadius,
       errorCardBackgroundColor:
           errorCardBackgroundColor ?? this.errorCardBackgroundColor,
       errorCardIconColor: errorCardIconColor ?? this.errorCardIconColor,
@@ -177,6 +180,9 @@ mixin _$WidgetToolkitThemeTailorMixin on ThemeExtension<WidgetToolkitTheme> {
         other.shimmerHighlightColor,
         t,
       )!,
+      shimmerBorderRadius: t < 0.5
+          ? shimmerBorderRadius
+          : other.shimmerBorderRadius,
       errorCardBackgroundColor: Color.lerp(
         errorCardBackgroundColor,
         other.errorCardBackgroundColor,
@@ -290,6 +296,10 @@ mixin _$WidgetToolkitThemeTailorMixin on ThemeExtension<WidgetToolkitTheme> {
               other.shimmerHighlightColor,
             ) &&
             const DeepCollectionEquality().equals(
+              shimmerBorderRadius,
+              other.shimmerBorderRadius,
+            ) &&
+            const DeepCollectionEquality().equals(
               errorCardBackgroundColor,
               other.errorCardBackgroundColor,
             ) &&
@@ -352,6 +362,7 @@ mixin _$WidgetToolkitThemeTailorMixin on ThemeExtension<WidgetToolkitTheme> {
       const DeepCollectionEquality().hash(buttonIconSize),
       const DeepCollectionEquality().hash(shimmerBaseColor),
       const DeepCollectionEquality().hash(shimmerHighlightColor),
+      const DeepCollectionEquality().hash(shimmerBorderRadius),
       const DeepCollectionEquality().hash(errorCardBackgroundColor),
       const DeepCollectionEquality().hash(errorCardIconColor),
       const DeepCollectionEquality().hash(errorCardTextColor),

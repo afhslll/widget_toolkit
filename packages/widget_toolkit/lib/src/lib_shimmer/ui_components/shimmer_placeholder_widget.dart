@@ -41,14 +41,14 @@ class ShimmerPlaceholderWidget extends StatelessWidget {
   /// Text color that will override the color property of the [style] field
   final Color? textColor;
 
-  double get _borderRadius => borderRadius ?? 16;
-
   @override
   Widget build(BuildContext context) => Container(
     alignment: alignment,
     decoration: BoxDecoration(
       color: shimmerColor ?? context.widgetToolkitTheme.shimmerBaseColor,
-      borderRadius: BorderRadius.all(Radius.circular(_borderRadius)),
+      borderRadius: BorderRadius.circular(
+        borderRadius ?? context.widgetToolkitTheme.shimmerBorderRadius,
+      ),
     ),
     child: Text(
       _placeholderText,
