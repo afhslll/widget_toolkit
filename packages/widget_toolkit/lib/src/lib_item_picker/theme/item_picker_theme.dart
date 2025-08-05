@@ -8,48 +8,96 @@ part 'item_picker_theme.tailor.dart';
 @TailorMixinComponent()
 class ItemPickerTheme extends ThemeExtension<ItemPickerTheme>
     with _$ItemPickerThemeTailorMixin {
-  const ItemPickerTheme({
-    required this.titlePadding,
-    required this.titleStyle,
-    required this.errorPadding,
-    required this.contentListPadding,
-    required this.footerPadding,
-  });
-
-  /// region Themes
-
-  ItemPickerTheme.light()
-      : contentListPadding = EdgeInsets.zero,
-        titlePadding = EdgeInsets.only(
-            bottom: WidgetToolkitDesignSystem.light().spacings.m,
-            left: WidgetToolkitDesignSystem.light().spacings.xs),
-        titleStyle = WidgetToolkitDesignSystem.light().typography.titleStyle,
-        errorPadding = EdgeInsets.zero,
-        footerPadding =
-            EdgeInsets.only(top: WidgetToolkitDesignSystem.light().spacings.m);
-
-  ItemPickerTheme.dark()
-      : titlePadding = EdgeInsets.only(
-            bottom: WidgetToolkitDesignSystem.dark().spacings.m,
-            left: WidgetToolkitDesignSystem.dark().spacings.xs),
-        titleStyle = WidgetToolkitDesignSystem.dark().typography.titleStyle,
-        errorPadding = EdgeInsets.zero,
-        contentListPadding = EdgeInsets.zero,
-        footerPadding =
-            EdgeInsets.only(top: WidgetToolkitDesignSystem.dark().spacings.m);
-
-  /// endregion
-
   @override
   final EdgeInsets titlePadding;
   @override
-  final TextStyle titleStyle;
+  final TextStyle titleTextStyle;
   @override
   final EdgeInsets errorPadding;
   @override
   final EdgeInsets contentListPadding;
   @override
   final EdgeInsets footerPadding;
+  @override
+  final EdgeInsets itemOuterPadding;
+  @override
+  final EdgeInsets itemInnerPadding;
+  @override
+  final Color itemSelectedColor;
+  @override
+  final Color itemUnselectedColor;
+  @override
+  final TextStyle itemTextStyle;
+  @override
+  final double itemBorderRadius;
+
+  const ItemPickerTheme({
+    required this.titlePadding,
+    required this.titleTextStyle,
+    required this.errorPadding,
+    required this.contentListPadding,
+    required this.footerPadding,
+    required this.itemOuterPadding,
+    required this.itemInnerPadding,
+    required this.itemSelectedColor,
+    required this.itemUnselectedColor,
+    required this.itemTextStyle,
+    required this.itemBorderRadius,
+  });
+
+  /// region Themes
+
+  ItemPickerTheme.light()
+    : contentListPadding = EdgeInsets.zero,
+      titlePadding = EdgeInsets.only(
+        bottom: WidgetToolkitDesignSystem.light().spacings.m,
+        left: WidgetToolkitDesignSystem.light().spacings.xs,
+      ),
+      titleTextStyle = WidgetToolkitDesignSystem.light().typography.titleMedM,
+      errorPadding = EdgeInsets.zero,
+      footerPadding = EdgeInsets.only(
+        top: WidgetToolkitDesignSystem.light().spacings.m,
+      ),
+      itemOuterPadding = EdgeInsets.symmetric(
+        vertical: WidgetToolkitDesignSystem.light().spacings.s,
+        horizontal: WidgetToolkitDesignSystem.light().spacings.m,
+      ),
+      itemInnerPadding = EdgeInsets.symmetric(
+        vertical: WidgetToolkitDesignSystem.light().spacings.s,
+        horizontal: WidgetToolkitDesignSystem.light().spacings.m,
+      ),
+      itemSelectedColor =
+          WidgetToolkitDesignSystem.light().colors.primaryContainer,
+      itemUnselectedColor = WidgetToolkitDesignSystem.light().colors.surface,
+      itemTextStyle = WidgetToolkitDesignSystem.light().typography.bodyRegM,
+      itemBorderRadius = WidgetToolkitDesignSystem.light().spacings.s;
+
+  ItemPickerTheme.dark()
+    : titlePadding = EdgeInsets.only(
+        bottom: WidgetToolkitDesignSystem.dark().spacings.m,
+        left: WidgetToolkitDesignSystem.dark().spacings.xs,
+      ),
+      titleTextStyle = WidgetToolkitDesignSystem.dark().typography.titleMedM,
+      errorPadding = EdgeInsets.zero,
+      contentListPadding = EdgeInsets.zero,
+      footerPadding = EdgeInsets.only(
+        top: WidgetToolkitDesignSystem.dark().spacings.m,
+      ),
+      itemOuterPadding = EdgeInsets.symmetric(
+        vertical: WidgetToolkitDesignSystem.dark().spacings.s,
+        horizontal: WidgetToolkitDesignSystem.dark().spacings.m,
+      ),
+      itemInnerPadding = EdgeInsets.symmetric(
+        vertical: WidgetToolkitDesignSystem.dark().spacings.s,
+        horizontal: WidgetToolkitDesignSystem.dark().spacings.m,
+      ),
+      itemSelectedColor =
+          WidgetToolkitDesignSystem.dark().colors.primaryContainer,
+      itemUnselectedColor = WidgetToolkitDesignSystem.dark().colors.surface,
+      itemTextStyle = WidgetToolkitDesignSystem.dark().typography.bodyRegM,
+      itemBorderRadius = WidgetToolkitDesignSystem.dark().spacings.s;
+
+  /// endregion
 }
 
 extension ItemPickerThemeContextExtension on BuildContext {

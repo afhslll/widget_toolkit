@@ -36,7 +36,6 @@ void showItemPickerBottomSheet<T extends PickerItemModel>({
   showBlurredBottomSheet(
     context: context,
     configuration: modalConfiguration,
-    onCancelPressed: () => Navigator.of(context).pop(),
     builder: (context) => ItemPickerPageWithDependencies<T>(
       title: title,
       saveButtonText: saveButtonText,

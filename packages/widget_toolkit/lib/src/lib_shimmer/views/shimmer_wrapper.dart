@@ -63,30 +63,26 @@ class ShimmerWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AnimatedSwitcher(
-        duration: const Duration(milliseconds: 300),
-        transitionBuilder: (child, animation) =>
-            fadeTransition || child.key == ShimmerWrapper.shimmerContainerKey
-                ? FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  )
-                : _appFadeTransition(animation: animation, child: child),
-        child: _buildChild(context),
-      );
+    duration: const Duration(milliseconds: 300),
+    transitionBuilder: (child, animation) =>
+        fadeTransition || child.key == ShimmerWrapper.shimmerContainerKey
+        ? FadeTransition(opacity: animation, child: child)
+        : _appFadeTransition(animation: animation, child: child),
+    child: _buildChild(context),
+  );
 
   Widget _buildChild(BuildContext context) {
     if (showShimmer) {
       return Container(
         key: ShimmerWrapper.shimmerContainerKey,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(radius)),
         ),
         alignment: alignment,
         child: Shimmer.fromColors(
           baseColor: baseColor ?? context.widgetToolkitTheme.shimmerBaseColor,
-          highlightColor: highlightColor ??
+          highlightColor:
+              highlightColor ??
               context.widgetToolkitTheme.shimmerHighlightColor,
           child: child,
         ),
@@ -94,10 +90,7 @@ class ShimmerWrapper extends StatelessWidget {
     }
 
     if (alignment != null) {
-      return Align(
-        alignment: alignment!,
-        child: child,
-      );
+      return Align(alignment: alignment!, child: child);
     }
 
     return child;
@@ -108,26 +101,17 @@ class ShimmerWrapper extends StatelessWidget {
   SingleChildRenderObjectWidget _appFadeTransition({
     required Animation<double> animation,
     required Widget child,
-  }) =>
-      FadeTransition(
-        opacity: CurvedAnimation(
-          parent: animation,
-          curve: const Interval(
-            0.4,
-            1.0,
-            curve: Curves.easeInOutCubic,
-          ),
-        ),
-        child: SizeTransition(
-          sizeFactor: CurvedAnimation(
-            parent: animation,
-            curve: const Interval(
-              0.0,
-              1.0,
-              curve: Curves.easeInOutCubic,
-            ),
-          ),
-          child: child,
-        ),
-      );
+  }) => FadeTransition(
+    opacity: CurvedAnimation(
+      parent: animation,
+      curve: const Interval(0.4, 1.0, curve: Curves.easeInOutCubic),
+    ),
+    child: SizeTransition(
+      sizeFactor: CurvedAnimation(
+        parent: animation,
+        curve: const Interval(0.0, 1.0, curve: Curves.easeInOutCubic),
+      ),
+      child: child,
+    ),
+  );
 }

@@ -45,19 +45,18 @@ class ShimmerPlaceholderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        alignment: alignment,
-        decoration: BoxDecoration(
-          color: shimmerColor ?? context.widgetToolkitTheme.shimmerBaseColor,
-          borderRadius: BorderRadius.all(
-            Radius.circular(_borderRadius),
-          ),
-        ),
-        child: Text(
-          _placeholderText,
-          style: style?.copyWith(
-              color: textColor ?? context.widgetToolkitTheme.shimmerBaseColor),
-          maxLines: maxLines,
-          overflow: overflow,
-        ),
-      );
+    alignment: alignment,
+    decoration: BoxDecoration(
+      color: shimmerColor ?? context.widgetToolkitTheme.shimmerBaseColor,
+      borderRadius: BorderRadius.all(Radius.circular(_borderRadius)),
+    ),
+    child: Text(
+      _placeholderText,
+      style: style?.copyWith(
+        color: textColor ?? context.widgetToolkitTheme.shimmerHighlightColor,
+      ),
+      maxLines: maxLines,
+      overflow: overflow,
+    ),
+  );
 }

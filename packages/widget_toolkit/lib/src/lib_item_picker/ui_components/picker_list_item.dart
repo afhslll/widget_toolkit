@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:widget_toolkit/widget_toolkit.dart';
 
-import '../../base/theme/widget_toolkit_theme.dart';
 import '../../lib_shimmer/views/shimmer_text.dart';
 
 class PickerListItem extends StatelessWidget {
@@ -23,36 +23,33 @@ class PickerListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: overrideStyle
-            ? null
-            : context.widgetToolkitTheme.pickerListItemOuterEdgeInsets,
-        child: Material(
-          color: overrideStyle
-              ? context.widgetToolkitTheme.pickerListItemUnselectedColor
-              : isSelected
-                  ? context.widgetToolkitTheme.pickerListItemSelectedColor
-                  : context.widgetToolkitTheme.pickerListItemUnselectedColor,
-          borderRadius: _radius(context),
-          child: InkWell(
-            onTap: onTap == null ? null : () => onTap!.call(),
-            borderRadius: _radius(context),
-            child: Container(
-              padding: overrideStyle
-                  ? null
-                  : context.widgetToolkitTheme.pickerListItemInnerEdgeInsets,
-              child: child ??
-                  ShimmerText(
-                    isLoading ? null : text,
-                    style: context.widgetToolkitTheme.pickerListItemTextStyle,
-                  ),
-            ),
-          ),
+    padding: overrideStyle ? null : context.itemPickerTheme.itemOuterPadding,
+    child: Material(
+      color: overrideStyle
+          ? context.itemPickerTheme.itemUnselectedColor
+          : isSelected
+          ? context.itemPickerTheme.itemSelectedColor
+          : context.itemPickerTheme.itemUnselectedColor,
+      borderRadius: _radius(context),
+      child: InkWell(
+        onTap: onTap == null ? null : () => onTap!.call(),
+        borderRadius: _radius(context),
+        child: Container(
+          padding: overrideStyle
+              ? null
+              : context.itemPickerTheme.itemInnerPadding,
+          child:
+              child ??
+              ShimmerText(
+                isLoading ? null : text,
+                style: context.itemPickerTheme.itemTextStyle,
+              ),
         ),
-      );
+      ),
+    ),
+  );
 
   BorderRadius _radius(BuildContext context) => BorderRadius.circular(
-        overrideStyle
-            ? 0
-            : context.widgetToolkitTheme.pickerListItemBorderRadius,
-      );
+    overrideStyle ? 0 : context.itemPickerTheme.itemBorderRadius,
+  );
 }

@@ -1,163 +1,76 @@
 import 'package:flutter/material.dart';
 
-// Material Design System documentation.
-// https://m2.material.io/design/color/the-color-system.html
-// https://m2.material.io/design/color/dark-theme.html
-
 @immutable
 class DesignSystemColors {
-  DesignSystemColors.light()
-      : brightness = Brightness.light,
-        primaryColor = const Color(0xff2196f3),
-        backgroundColor = Colors.white,
-        scaffoldBackgroundColor = Colors.white,
-        highlightColor = Colors.black,
-        errorTitleColor = Colors.black,
-        bottomSheetBarrierColor = const Color(0xccf0f0f2),
-        shimmerBaseColor = const Color(0xffd8e1ee),
-        shimmerHighlightColor = const Color(0xfff1f3f8);
+  const DesignSystemColors.light()
+    : brightness = Brightness.light,
+      primary = const Color(0xFF6750A4),
+      onPrimary = const Color(0xFFFFFFFF),
+      primaryContainer = const Color(0xFFEADDFF),
+      onPrimaryContainer = const Color(0xFF21005D),
+      secondary = const Color(0xFF625B71),
+      onSecondary = const Color(0xFFFFFFFF),
+      secondaryContainer = const Color(0xFFE8DEF8),
+      onSecondaryContainer = const Color(0xFF1D192B),
+      tertiary = const Color(0xFF7D5260),
+      onTertiary = const Color(0xFFFFFFFF),
+      error = const Color(0xFFBA1A1A),
+      onError = const Color(0xFFFFFFFF),
+      surface = const Color(0xFFFEF7FF),
+      onSurface = const Color(0xFF1C1B1F),
+      shadow = const Color(0xffc9c6c5);
 
-  DesignSystemColors.dark()
-      : brightness = Brightness.dark,
-        primaryColor = const Color(0xff004f95),
-        backgroundColor = Colors.black,
-        scaffoldBackgroundColor = Colors.black,
-        highlightColor = Colors.white,
-        errorTitleColor = Colors.white,
-        bottomSheetBarrierColor = Colors.black.withValues(alpha: 0.5),
-        shimmerBaseColor = const Color(0xff9da2a6),
-        shimmerHighlightColor = const Color(0xffF0F0F2);
+  const DesignSystemColors.dark()
+    : brightness = Brightness.dark,
+      primary = const Color(0xFFD0BCFF),
+      onPrimary = const Color(0xFF381E72),
+      primaryContainer = const Color(0xFF4F378B),
+      onPrimaryContainer = const Color(0xFFEADDFF),
+      secondary = const Color(0xFFCCC2DC),
+      onSecondary = const Color(0xFF332D41),
+      secondaryContainer = const Color(0xFF4A4458),
+      onSecondaryContainer = const Color(0xFFE8DEF8),
+      tertiary = const Color(0xFFEFB8C8),
+      onTertiary = const Color(0xFF492532),
+      error = const Color(0xFFFFB4AB),
+      onError = const Color(0xFF690005),
+      surface = const Color(0xFF141218),
+      onSurface = const Color(0xFFE6E0E9),
+      shadow = const Color(0xffc9c6c5);
 
   final Brightness brightness;
 
   /// region Essential (Material and component) colors
 
-  final Color primaryColor;
-
-  final Color backgroundColor;
-
-  final Color scaffoldBackgroundColor;
-
-  final Color highlightColor;
-
-  /// Color of the title of an error message
-  final Color errorTitleColor;
-
-  final errorColor = const Color(0xFFFFCDD2);
-
-  /// endregion
-
-  /// region App-specific colors
-
-  final inactiveButtonColor = Colors.grey;
-
-  final activeButtonColor = const Color(0xFFC8E6C9);
-
-  final inactiveButtonTextColor = Colors.black;
-
-  final activeButtonTextColor = Colors.white;
-
-  final Color bottomSheetBarrierColor;
-
-  final activeButtonLanguageTextColor = const Color(0xff212526);
-
-  final buttonBlueGradientEnd = _HexColor('BFE1FF');
-
-  final Color shimmerBaseColor;
-
-  final Color shimmerHighlightColor;
-
-  final textFieldDialogBlack = const Color(0xff212526);
-
-  final textFieldDialogWhite = const Color(0xfffafafc);
-
-  Color get textFieldDialogTransparent => transparent;
-
-  Color get textFieldDialogBlue => darkBlue;
-
-  final editAddressBlack = const Color(0xff212526);
-
-  final editAddressWidget = Colors.black45;
-
-  Color get editAddressMediumWhite => lightGray;
-
-  Color get editAddressBackground => darkGray;
-
-  Color get editAddressWhite => textColorWhite;
-
-  Color get editAddressBlue => darkBlue;
-
-  Color get editAddressGreen => darkGreen;
-
-  Color get permanentAddressDisabledFilledButtonBackgroundColor => gray;
-
-  Color get permanentAddressBlueLight => blueLight;
-
-  Color get editAddressWidgetSplashColor => transparent;
-
-  Color get editAddressWidgetHighlightColor => transparent;
-
-  final qrScannerMediumWhite = const Color(0xfff0f0f2);
-
-  final qrScannerGradientRedStart = _HexColor('D40E14');
-
-  Color get qrScannerRedLightColor => lightRed;
-
-  Color get qrScannerLinearProgressRedLightColor => lightRed;
-
-  Color get qrScannerRed => red;
-
-  Color get qrScannerlinearProgressIndicatorRed => red;
-
-  Color get qrScannerDisabledFilledButtonGrey => gray;
-
-  Color get qrScannerPageBackgroundColor => darkGray;
-
-  Color get qrScannerPageScaffoldBackgroundColor => darkGray;
-
-  Color get qrScannerPageBackgroundColorWhite => white;
-
-  Color get qrScannerPageScaffoldBackgroundColorWhite => white;
-
-  Color get qrScannerSubtitleWhite => white;
-
-  Color get qrScannerPageAppBarBackgroundColorWhite => white;
-
-  Color get qrScannerPageAppBarBackgroundColorGrey => darkGray;
-
-  Color get appBarColorGrey => darkGray;
-
-  Color get appBarColorWhite => white;
-
-  Color get appBarTextColorGrey => darkGray;
-
-  Color get appBarTextColorWhite => white;
-
-  Color get backButtonTransparentColor => transparent;
-
-  /// endregion
+  final Color primary;
+  final Color onPrimary;
+  final Color primaryContainer;
+  final Color onPrimaryContainer;
+  final Color secondary;
+  final Color onSecondary;
+  final Color secondaryContainer;
+  final Color onSecondaryContainer;
+  final Color tertiary;
+  final Color onTertiary;
+  final Color error;
+  final Color onError;
+  final Color surface;
+  final Color onSurface;
+  final Color shadow;
 
   /// region General purpose colors
 
-  final textColorWhite = const Color(0xfffafafc);
-
   final transparent = const Color(0x00000000);
-
-  final snow = const Color(0xfffffafa);
-
-  final black87 = Colors.black87;
 
   final black = Colors.black;
 
   final blueAccent = Colors.blueAccent;
 
-  final gray = const Color(0xff9da2a6);
+  final neutral90 = const Color.fromARGB(255, 232, 232, 232);
 
-  final darkGray = const Color(0xff393E46);
+  final neutral80 = const Color(0xffc9c6c5);
 
-  final black45 = Colors.black45;
-
-  final lightGray = const Color(0xffF0F0F2);
+  final neutral40 = const Color(0xff605e5e);
 
   final blue = const Color(0xFF2196F3);
 
@@ -174,18 +87,6 @@ class DesignSystemColors {
   final red = const Color(0xffd40e14);
 
   final redDark = const Color(0xff990f13);
-
-  final lightRed = const Color(0xffffe5e6);
-
-  final blueLight = const Color(0xffe5f4ff);
-
-  final greenLight = const Color(0xffdcf5ed);
-
-  final orangeLight = const Color(0xffffe9d9);
-
-  final darkBlue = const Color(0xff004f95);
-
-  final darkGreen = const Color(0xff008559);
 
   final orange = const Color(0xffec6601);
 

@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rx_bloc/flutter_rx_bloc.dart';
+import 'package:widget_toolkit/widget_toolkit.dart';
 
 import '../../base/models/item_builder.dart';
-import '../../base/models/picker_item_model.dart';
 import '../../base/utils/easy_fade_transition.dart';
-import '../../lib_ui_components/buttons/button_state.dart';
-import '../../lib_ui_components/buttons/gradient_fill_button.dart';
-import '../../lib_ui_components/error_card_widget.dart';
 import '../blocs/item_picker_bloc.dart';
-import '../theme/item_picker_theme.dart';
 import '../ui_components/picker_list_item.dart';
 
 class ItemPickerPage<T extends PickerItemModel> extends StatefulWidget {
@@ -29,12 +25,12 @@ class ItemPickerPage<T extends PickerItemModel> extends StatefulWidget {
     this.emptyBuilder,
     this.loadingBuilder,
     super.key,
-  })  : selectedItems = selectedItems ?? const [],
-        isMultiSelect = isMultiSelect ?? false,
-        isStatic = isStatic ?? true,
-        isItemSelectionRequired = isItemSelectionRequired ?? true,
-        loadingItemsCount = loadingItemsCount ?? 3,
-        loadingItemHeight = loadingItemHeight ?? 60;
+  }) : selectedItems = selectedItems ?? const [],
+       isMultiSelect = isMultiSelect ?? false,
+       isStatic = isStatic ?? true,
+       isItemSelectionRequired = isItemSelectionRequired ?? true,
+       loadingItemsCount = loadingItemsCount ?? 3,
+       loadingItemHeight = loadingItemHeight ?? 60;
 
   final String? title;
   final String? saveButtonText;
@@ -70,21 +66,18 @@ class _ItemPickerPageState<T extends PickerItemModel>
 
   @override
   Widget build(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Flexible(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _buildHeader(),
-                _buildContent(),
-              ],
-            ),
-          ),
-          _buildFooter(),
-        ],
-      );
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Flexible(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [_buildHeader(), _buildContent()],
+        ),
+      ),
+      _buildFooter(),
+    ],
+  );
 
   Widget _buildHeader() => widget.title != null
       ? Padding(
@@ -93,53 +86,51 @@ class _ItemPickerPageState<T extends PickerItemModel>
             children: [
               Text(
                 widget.title!,
-                style: context.itemPickerTheme.titleStyle,
-              )
+                style: context.itemPickerTheme.titleTextStyle,
+              ),
             ],
           ),
         )
       : const SizedBox.shrink();
 
   Widget _buildContent() => Flexible(
-        child: RxResultBuilder<ItemPickerBlocType, List>(
-          state: (bloc) => bloc.states.items,
-          buildError: (context, error, bloc) => Padding(
-            padding: context.itemPickerTheme.errorPadding,
-            child: widget.errorBuilder?.call(error) ??
-                ErrorCardWidget(
-                  text: error.toString(),
-                  retryButtonVisible: true,
-                  onRetryPressed: () => bloc.events.loadItems(),
-                ),
-          ),
-          buildSuccess: (context, list, bloc) => list.isEmpty
-              ? Padding(
-                  padding: context.itemPickerTheme.contentListPadding,
-                  child: widget.emptyBuilder?.call() ??
-                      const ErrorCardWidget(text: 'No items'),
-                )
-              : _buildList(list as List<T>),
-          buildLoading: (context, bloc) => widget.isStatic
-              ? const SizedBox.shrink()
-              : _buildList(
-                  [],
-                  isLoading: true,
-                ),
-        ),
-      );
+    child: RxResultBuilder<ItemPickerBlocType, List>(
+      state: (bloc) => bloc.states.items,
+      buildError: (context, error, bloc) => Padding(
+        padding: context.itemPickerTheme.errorPadding,
+        child:
+            widget.errorBuilder?.call(error) ??
+            ErrorCardWidget(
+              text: error.toString(),
+              retryButtonVisible: true,
+              onRetryPressed: () => bloc.events.loadItems(),
+            ),
+      ),
+      buildSuccess: (context, list, bloc) => list.isEmpty
+          ? Padding(
+              padding: context.itemPickerTheme.contentListPadding,
+              child:
+                  widget.emptyBuilder?.call() ??
+                  const ErrorCardWidget(text: 'No items'),
+            )
+          : _buildList(list as List<T>),
+      buildLoading: (context, bloc) => widget.isStatic
+          ? const SizedBox.shrink()
+          : _buildList([], isLoading: true),
+    ),
+  );
 
   Widget _buildFooter() => RxResultBuilder<ItemPickerBlocType, List>(
-        state: (bloc) => bloc.states.items,
-        buildError: (context, error, bloc) => _buildFooterButtons(),
-        buildSuccess: (context, list, bloc) => _buildFooterButtons(),
-        buildLoading: (context, bloc) => _buildFooterButtons(
-          isLoading: true,
-        ),
-      );
+    state: (bloc) => bloc.states.items,
+    buildError: (context, error, bloc) => _buildFooterButtons(),
+    buildSuccess: (context, list, bloc) => _buildFooterButtons(),
+    buildLoading: (context, bloc) => _buildFooterButtons(isLoading: true),
+  );
 
   Widget _buildList(List<T> list, {bool isLoading = false}) {
-    double? height =
-        isLoading ? widget.loadingItemsCount * widget.loadingItemHeight : null;
+    double? height = isLoading
+        ? widget.loadingItemsCount * widget.loadingItemHeight
+        : null;
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 900),
       transitionBuilder: (child, animation) =>
@@ -167,7 +158,8 @@ class _ItemPickerPageState<T extends PickerItemModel>
               ),
             );
           },
-          separatorBuilder: widget.separatorBuilder ??
+          separatorBuilder:
+              widget.separatorBuilder ??
               (context, index) => const SizedBox.shrink(),
         ),
       ),
@@ -182,14 +174,13 @@ class _ItemPickerPageState<T extends PickerItemModel>
         children: [
           if (widget.footerBuilder != null) widget.footerBuilder!(context),
           if (widget.isMultiSelect)
-            GradientFillButton(
-              elevation: 0,
+            ToolkitButton(
               state: _saveState(isLoading: isLoading),
               text: widget.saveButtonText ?? 'Save',
               onPressed: () =>
-                  _saveState(isLoading: isLoading) == ButtonStateModel.enabled
-                      ? widget.onTap(selectedItems)
-                      : null,
+                  _saveState(isLoading: isLoading) == ToolkitButtonState.enabled
+                  ? widget.onTap(selectedItems)
+                  : null,
             ),
         ],
       ),
@@ -210,11 +201,11 @@ class _ItemPickerPageState<T extends PickerItemModel>
     }
   }
 
-  ButtonStateModel _saveState({bool isLoading = false}) {
+  ToolkitButtonState _saveState({bool isLoading = false}) {
     if ((widget.isItemSelectionRequired && selectedItems.isEmpty) ||
         isLoading) {
-      return ButtonStateModel.disabled;
+      return ToolkitButtonState.disabled;
     }
-    return ButtonStateModel.enabled;
+    return ToolkitButtonState.enabled;
   }
 }

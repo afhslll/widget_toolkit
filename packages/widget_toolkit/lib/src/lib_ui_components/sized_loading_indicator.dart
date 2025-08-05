@@ -20,17 +20,19 @@ class SizedLoadingIndicator extends StatelessWidget {
       );
 
   factory SizedLoadingIndicator.textButtonValue({Color? color}) =>
-      const SizedLoadingIndicator(
+      SizedLoadingIndicator(
         padding: EdgeInsets.zero,
         size: Size(20, 20),
         strokeWidth: 2,
+        color: color,
       );
 
   factory SizedLoadingIndicator.taskValue({required Color color}) =>
-      const SizedLoadingIndicator(
+      SizedLoadingIndicator(
         padding: EdgeInsets.zero,
         strokeWidth: 2,
         size: Size(32, 32),
+        color: color,
       );
 
   final Alignment alignment;
@@ -41,13 +43,13 @@ class SizedLoadingIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        alignment: alignment,
-        padding: padding,
-        width: size.width,
-        height: size.height,
-        child: CircularProgressIndicator(
-          color: color ?? context.widgetToolkitTheme.loadingIndicatorColor,
-          strokeWidth: strokeWidth,
-        ),
-      );
+    alignment: alignment,
+    padding: padding,
+    width: size.width,
+    height: size.height,
+    child: CircularProgressIndicator(
+      color: color ?? context.widgetToolkitTheme.loadingIndicatorColor,
+      strokeWidth: strokeWidth,
+    ),
+  );
 }

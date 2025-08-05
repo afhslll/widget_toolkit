@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../ui_components.dart';
 import '../base/theme/widget_toolkit_theme.dart';
-import 'buttons/button_color_style.dart';
-import 'buttons/button_state.dart';
-import 'buttons/gradient_fill_button.dart';
 
 /// ErrorCardWidget is an error widget presenting an error as a widget.
 /// It provides an option to display a retry button in case the user wants to
@@ -25,7 +23,7 @@ import 'buttons/gradient_fill_button.dart';
 ///
 /// In case you want to display a retry button, you can do that by setting the
 /// [retryButtonVisible] flag to `true`. You can customize the text and color of
-/// the retry button by providing a [retryButtonText] and a [retryButtonColorStyle]
+/// the retry button by providing a [retryButtonText] and a [retryToolkitButtonStyle]
 /// for the widget.
 ///
 /// Once the button is pressed, the [onRetryPressed] callback is executed. Also,
@@ -38,17 +36,17 @@ class ErrorCardWidget extends StatelessWidget {
     this.exceptionTextBuilder,
     this.header,
     this.onRetryPressed,
-    this.retryButtonColorStyle,
+    this.retryToolkitButtonStyle,
     this.retryButtonText = 'Retry',
     this.retryButtonVisible = false,
-    this.retryButtonState = ButtonStateModel.enabled,
+    this.retryButtonState = ToolkitButtonState.enabled,
     this.verticalAxisAlignment = MainAxisAlignment.start,
     super.key,
   }) : assert(
-          text != null || exception != null,
-          'Either text or an exception is required for the ErrorCardWidget'
-          ' widget to display an error message.',
-        );
+         text != null || exception != null,
+         'Either text or an exception is required for the ErrorCardWidget'
+         ' widget to display an error message.',
+       );
 
   /// The [text] to be displayed, if no [exception] is provided
   final String? text;
@@ -69,13 +67,13 @@ class ErrorCardWidget extends StatelessWidget {
   final Widget? header;
 
   /// The color style of the retry button
-  final ButtonColorStyle? retryButtonColorStyle;
+  final ToolkitButtonStyle? retryToolkitButtonStyle;
 
   /// Flag indicating whether or not to display the retry button
   final bool retryButtonVisible;
 
   /// The state of the retry button
-  final ButtonStateModel retryButtonState;
+  final ToolkitButtonState retryButtonState;
 
   /// The vertical alignment of the contents of the widget
   final MainAxisAlignment verticalAxisAlignment;
@@ -91,64 +89,54 @@ class ErrorCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-        mainAxisAlignment: verticalAxisAlignment,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: context.widgetToolkitTheme.errorCardBackgroundColor,
-              borderRadius: BorderRadius.circular(
-                16,
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(width: double.infinity),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 24,
-                    bottom: 12,
-                  ),
-                  child: header ??
-                      Icon(
-                        Icons.warning,
-                        color: context.widgetToolkitTheme.errorCardIconColor,
-                      ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 22,
-                    right: 16,
-                    bottom: 22,
-                  ),
-                  child: Text(
-                    _buildErrorText(context),
-                    style: context.widgetToolkitTheme.descriptionBold.copyWith(
-                      color: context.widgetToolkitTheme.errorCardTextColor,
-                      letterSpacing: 1.1,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          if (retryButtonVisible)
+    mainAxisAlignment: verticalAxisAlignment,
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Container(
+        decoration: BoxDecoration(
+          color: context.widgetToolkitTheme.errorCardBackgroundColor,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(width: double.infinity),
             Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: GradientFillButton(
-                text: retryButtonText,
-                onPressed: onRetryPressed,
-                colorStyle: retryButtonColorStyle,
-                radius: 24,
-                elevation: 8,
-                state: retryButtonState,
+              padding: const EdgeInsets.only(top: 24, bottom: 12),
+              child:
+                  header ??
+                  Icon(
+                    Icons.warning,
+                    color: context.widgetToolkitTheme.errorCardIconColor,
+                  ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 22, right: 16, bottom: 22),
+              child: Text(
+                _buildErrorText(context),
+                style: context.widgetToolkitTheme.typography.titleMedM.copyWith(
+                  color: context.widgetToolkitTheme.errorCardTextColor,
+                  letterSpacing: 1.1,
+                ),
+                textAlign: TextAlign.center,
               ),
             ),
-        ],
-      );
+          ],
+        ),
+      ),
+      if (retryButtonVisible)
+        Padding(
+          padding: const EdgeInsets.only(top: 16),
+          child: ToolkitButton(
+            text: retryButtonText,
+            onPressed: onRetryPressed ?? () {},
+            style: retryToolkitButtonStyle,
+            state: retryButtonState,
+          ),
+        ),
+    ],
+  );
 
   String _buildErrorText(BuildContext context) {
     /// If text is provided, return it
