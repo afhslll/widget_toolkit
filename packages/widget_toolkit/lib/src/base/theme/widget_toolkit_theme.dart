@@ -118,13 +118,13 @@ class WidgetToolkitTheme extends ThemeExtension<WidgetToolkitTheme>
           WidgetToolkitDesignSystem.light().colors.neutral80,
       buttonDisabledForegroundColor =
           WidgetToolkitDesignSystem.light().colors.neutral40,
-      buttonBorderColor = WidgetToolkitDesignSystem.light().colors.primary,
+      buttonBorderColor = Colors.transparent,
       buttonShadowColor = WidgetToolkitDesignSystem.light().colors.primary,
       buttonBorderRadius = WidgetToolkitDesignSystem.light().spacings.s,
       buttonTextStyle = WidgetToolkitDesignSystem.light().typography.titleMedM,
       buttonElevation = 32.0,
       buttonPadding = EdgeInsets.symmetric(
-        vertical: WidgetToolkitDesignSystem.light().spacings.s,
+        vertical: WidgetToolkitDesignSystem.light().spacings.s1,
       ),
       buttonIconSize = WidgetToolkitDesignSystem.light().spacings.l,
       loadingIndicatorColor =
@@ -161,14 +161,14 @@ class WidgetToolkitTheme extends ThemeExtension<WidgetToolkitTheme>
           WidgetToolkitDesignSystem.dark().colors.neutral80,
       buttonDisabledForegroundColor =
           WidgetToolkitDesignSystem.dark().colors.white,
-      buttonBorderColor = WidgetToolkitDesignSystem.dark().colors.primary,
+      buttonBorderColor = Colors.transparent,
       buttonShadowColor = WidgetToolkitDesignSystem.dark().colors.primary,
       buttonBorderRadius = WidgetToolkitDesignSystem.dark().spacings.s,
       shimmerBorderRadius = WidgetToolkitDesignSystem.dark().spacings.xs,
       buttonTextStyle = WidgetToolkitDesignSystem.dark().typography.titleMedM,
       buttonElevation = 32.0,
       buttonPadding = EdgeInsets.symmetric(
-        vertical: WidgetToolkitDesignSystem.dark().spacings.s,
+        vertical: WidgetToolkitDesignSystem.dark().spacings.s1,
       ),
       buttonIconSize = WidgetToolkitDesignSystem.dark().spacings.l,
       loadingIndicatorColor = WidgetToolkitDesignSystem.dark().colors.onPrimary,

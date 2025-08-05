@@ -10,18 +10,17 @@ class ItemPickerDependencies<T extends PickerItemModel> {
   ItemPickerDependencies._(this.context, this.service);
 
   factory ItemPickerDependencies.from(
-          BuildContext context, ItemPickerService<T> service) =>
-      ItemPickerDependencies._(context, service);
+    BuildContext context,
+    ItemPickerService<T> service,
+  ) => ItemPickerDependencies._(context, service);
 
   final ItemPickerService<T> service;
   final BuildContext context;
 
-  late List<SingleChildWidget> providers = [
-    ..._blocs,
-  ];
+  late List<SingleChildWidget> providers = [..._blocs];
 
   late final List<RxBlocProvider> _blocs = [
-    RxBlocProvider<ItemPickerBlocType>(
+    RxBlocProvider<ItemPickerBlocType<T>>(
       create: (context) => ItemPickerBloc<T>(service),
     ),
   ];

@@ -74,9 +74,17 @@ class _MyAppState extends State<MyApp> {
                 spacing: 16,
                 children: [
                   ToolkitButton(
-                    text: 'Filled button',
-                    onPressed: () {},
+                    text: 'Disabled button',
                     state: ToolkitButtonState.disabled,
+                    onPressed: () {
+                      print('Disabled button pressed');
+                    },
+                  ),
+                  ToolkitButton(text: 'Filled button', onPressed: () {}),
+                  ToolkitButton.outlined(
+                    context,
+                    text: 'Outlined button',
+                    onPressed: () {},
                   ),
                   ToolkitButton(
                     text: 'Open bottom sheet',

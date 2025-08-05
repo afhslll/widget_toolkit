@@ -22,6 +22,33 @@ class ToolkitButton extends StatefulWidget {
   final ToolkitButtonState state;
   final VoidCallback onPressed;
 
+  factory ToolkitButton.outlined(
+    BuildContext context, {
+    required String text,
+    required VoidCallback onPressed,
+    IconData? leadingIcon,
+    IconData? trailingIcon,
+    ToolkitButtonStyle? style,
+    ToolkitButtonState state = ToolkitButtonState.enabled,
+  }) {
+    return ToolkitButton(
+      text: text,
+      onPressed: onPressed,
+      leadingIcon: leadingIcon,
+      trailingIcon: trailingIcon,
+      style:
+          style ??
+          ToolkitButtonStyle(
+            backgroundColor: context.widgetToolkitTheme.colors.primaryContainer,
+            foregroundColor:
+                context.widgetToolkitTheme.colors.onPrimaryContainer,
+            borderColor: context.widgetToolkitTheme.colors.onPrimaryContainer,
+            elevation: 0.0,
+          ),
+      state: state,
+    );
+  }
+
   @override
   State<ToolkitButton> createState() => _ToolkitButtonState();
 }
@@ -160,6 +187,11 @@ class _ToolkitButtonState extends State<ToolkitButton> {
       gradient: _gradient?.resolve(value),
       shape: shape,
       borderRadius: borderRadius,
+      border: BoxBorder.all(
+        color:
+            widget.style?.borderColor ??
+            context.widgetToolkitTheme.buttonBorderColor,
+      ),
       boxShadow: shadow != null ? [shadow] : null,
     );
   }
@@ -232,7 +264,11 @@ class _ToolkitButtonState extends State<ToolkitButton> {
         );
       },
       child: ElevatedButton(
-        onPressed: widget.onPressed,
+        onPressed:
+            widget.state == ToolkitButtonState.disabled ||
+                widget.state == ToolkitButtonState.loading
+            ? () {}
+            : widget.onPressed,
         statesController: _statesController,
         style: _noBackgroundStyle(context),
         child: _child(context),

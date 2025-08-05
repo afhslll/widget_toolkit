@@ -1,4 +1,5 @@
 export 'src/base/common_ui_components/rx_form_field_builder.dart';
+export 'src/base/common_services/text_field_validator.dart';
 export 'src/lib_ui_components/buttons/button.dart';
 export 'src/lib_ui_components/buttons/button_style.dart';
 export 'src/lib_ui_components/buttons/button_state.dart';
