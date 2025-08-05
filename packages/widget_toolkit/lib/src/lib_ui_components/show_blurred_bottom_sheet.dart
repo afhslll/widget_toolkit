@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import '../../../base/theme/widget_toolkit_theme.dart';
+import '../base/theme/widget_toolkit_theme.dart';
 
 /// Flag controlling the state of whether a modal sheet is shown in case we want
 /// to limit the number of modal sheets shown. It will be updated automatically
@@ -28,8 +28,7 @@ Future<T?> showBlurredBottomSheet<T>({
   required BuildContext context,
   required WidgetBuilder builder,
   ModalConfiguration configuration = const ModalConfiguration(),
-  WidgetBuilder? headerBuilder,
-  VoidCallback? onCancelPressed,
+  String? headerText,
 }) {
   // Dismiss any other modal sheets if only one is enforced
   if (configuration.haveOnlyOneSheet) {
@@ -65,8 +64,7 @@ Future<T?> showBlurredBottomSheet<T>({
             ? _calculateFullScreenRatio(context)
             : configuration.heightFactor,
         builder: builder,
-        onClosePressed: onCancelPressed,
-        headerBuilder: headerBuilder,
+        headerText: headerText,
         showCloseButton: configuration.showCloseButton,
         contentAlignment: configuration.contentAlignment,
         showHeaderPill: configuration.showHeaderPill,
@@ -89,18 +87,15 @@ class _ModalContent extends StatelessWidget {
     required this.showHeaderPill,
     required this.safeAreaBottom,
     required this.dialogHasBottomPadding,
-    this.headerBuilder,
     this.heightFactor,
     this.contentAlignment,
-    this.onClosePressed,
+    this.headerText,
   });
 
   /// The builder method returning the contents of the modal sheet
   final WidgetBuilder builder;
 
-  /// Builder method building a widget that will be displayed above the content
-  /// built with the [builder] method
-  final WidgetBuilder? headerBuilder;
+  final String? headerText;
 
   /// Value for how much of the remaining screen size will the content take
   final double? heightFactor;
@@ -117,9 +112,6 @@ class _ModalContent extends StatelessWidget {
 
   /// Flag indicating the visibility of the already implemented close button
   final bool showCloseButton;
-
-  /// Callback for close
-  final VoidCallback? onClosePressed;
 
   /// Flag indicating if bottom overlay should be added as padding at the bottom
   /// of the page
@@ -139,99 +131,58 @@ class _ModalContent extends StatelessWidget {
         );
 
   Widget _buildContent(BuildContext context) {
-    final builderContent = Container(
-      color: context.widgetToolkitTheme.bottomSheetBackgroundColor,
-      padding: context.widgetToolkitTheme.bottomSheetContentPadding,
-      child: builder(context),
-    );
-
     final mainContent = Column(
       mainAxisAlignment: contentAlignment ?? MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        /// Wrap the header in a `translate` widget, which will shift all its
-        /// header contents down by 1px to prevent a glitching gap line which is
-        /// appearing between the header and the contents of the modal sheet.
-        Transform.translate(
-          offset: const Offset(0, 1),
-          child: _buildHeader(context),
-        ),
-        Flexible(child: builderContent),
-        // if (showCloseButton) _buildCloseButton(context),
-        if (!safeAreaBottom)
-          SizedBox(height: context.widgetToolkitTheme.bottomSheetBottomHeight),
-        if (dialogHasBottomPadding)
-          SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
+        _buildPill(context),
+        if (headerText != null)
+          Padding(
+            padding: context.widgetToolkitTheme.bottomSheetHeaderPadding,
+            child: Text(
+              headerText!,
+              style: context.widgetToolkitTheme.typography.headlineRegS,
+            ),
+          ),
+        Flexible(child: builder(context)),
       ],
     );
 
     return Container(
-      color: context.widgetToolkitTheme.bottomSheetBackgroundColor,
-      child: SafeArea(bottom: safeAreaBottom, child: mainContent),
+      padding: context.widgetToolkitTheme.bottomSheetContentPadding,
+      decoration: BoxDecoration(
+        color: context.widgetToolkitTheme.bottomSheetBackgroundColor,
+        boxShadow: [
+          BoxShadow(
+            color: context.widgetToolkitTheme.colors.shadow.withAlpha(100),
+            blurRadius: 40,
+            offset: const Offset(0, -1),
+          ),
+        ],
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(
+            context.widgetToolkitTheme.bottomSheetTopRadius,
+          ),
+          topRight: Radius.circular(
+            context.widgetToolkitTheme.bottomSheetTopRadius,
+          ),
+        ),
+      ),
+      child: SafeArea(bottom: true, child: mainContent),
     );
   }
 
-  double get _cornerRadius => 24;
-
-  double get _headerHeight => headerBuilder != null ? 72 : 15;
-
-  Widget _buildHeader(BuildContext context) => Container(
-    height: _headerHeight,
-    decoration: _buildDecoration(context),
-    child: Stack(
-      alignment: Alignment.center,
-      children: [
-        if (showHeaderPill)
-          Positioned.fill(
-            top: 6,
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 32,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: context.widgetToolkitTheme.bottomSheetLineColor,
-                  borderRadius: const BorderRadius.all(Radius.circular(3)),
-                ),
-              ),
-            ),
-          ),
-        if (headerBuilder != null)
-          Positioned(
-            child: Padding(
-              padding: context.widgetToolkitTheme.bottomSheetHeaderPadding,
-              child: headerBuilder?.call(context),
-            ),
-          ),
-      ],
+  Widget _buildPill(BuildContext context) => Center(
+    child: Container(
+      width: 40,
+      height: 4,
+      decoration: BoxDecoration(
+        color: context.widgetToolkitTheme.bottomSheetLineColor,
+        borderRadius: BorderRadius.circular(2),
+      ),
     ),
   );
-
-  BoxDecoration _buildDecoration(BuildContext context) => BoxDecoration(
-    color: context.widgetToolkitTheme.bottomSheetBackgroundColor,
-    border: Border.all(color: Colors.transparent, width: 0),
-    borderRadius: BorderRadius.only(
-      topRight: Radius.circular(_cornerRadius),
-      topLeft: Radius.circular(_cornerRadius),
-    ),
-  );
-
-  //   Widget _buildCloseButton(BuildContext context) => Container(
-  //     padding: context.widgetToolkitTheme.bottomSheetCloseButtonPadding,
-  //     color: context.widgetToolkitTheme.bottomSheetBackgroundColor,
-  //     child: SmallButton(
-  //       onPressed: onClosePressed ?? () => Navigator.of(context).pop(),
-  //       icon: Icons.close,
-  //       type: SmallButtonType.outline,
-  //       colorStyle: ButtonColorStyle.fromContext(
-  //         context,
-  //         activeGradientColorStart:
-  //             context.widgetToolkitTheme.disabledFilledButtonBackgroundColor,
-  //         activeGradientColorEnd: context.widgetToolkitTheme.primaryGradientEnd,
-  //       ),
-  //     ),
-  //   );
 }
 
 /// App Modal sheet configuration used for controlling different parts and

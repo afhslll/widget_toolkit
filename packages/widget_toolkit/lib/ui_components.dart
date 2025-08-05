@@ -9,5 +9,4 @@ export 'src/lib_ui_components/item_picker_field/models/item_picker_controller.da
 export 'src/lib_ui_components/item_picker_field/ui_components/item_picker_field.dart';
 export 'src/lib_ui_components/sized_loading_indicator.dart';
 export 'src/lib_ui_components/error_card_widget.dart';
-export 'src/lib_ui_components/bottom_sheets/ui_components/show_blurred_bottom_sheet.dart';
-export 'src/lib_ui_components/bottom_sheets/models/bottom_sheet_style.dart';
+export 'src/lib_ui_components/show_blurred_bottom_sheet.dart';

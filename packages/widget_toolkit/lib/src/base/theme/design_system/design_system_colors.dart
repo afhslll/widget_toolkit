@@ -17,7 +17,8 @@ class DesignSystemColors {
       error = const Color(0xFFBA1A1A),
       onError = const Color(0xFFFFFFFF),
       surface = const Color(0xFFFEF7FF),
-      onSurface = const Color(0xFF1C1B1F);
+      onSurface = const Color(0xFF1C1B1F),
+      shadow = const Color(0xffc9c6c5);
 
   const DesignSystemColors.dark()
     : brightness = Brightness.dark,
@@ -34,7 +35,8 @@ class DesignSystemColors {
       error = const Color(0xFFFFB4AB),
       onError = const Color(0xFF690005),
       surface = const Color(0xFF141218),
-      onSurface = const Color(0xFFE6E0E9);
+      onSurface = const Color(0xFFE6E0E9),
+      shadow = const Color(0xffc9c6c5);
 
   final Brightness brightness;
 
@@ -54,6 +56,7 @@ class DesignSystemColors {
   final Color onError;
   final Color surface;
   final Color onSurface;
+  final Color shadow;
 
   /// region General purpose colors
 

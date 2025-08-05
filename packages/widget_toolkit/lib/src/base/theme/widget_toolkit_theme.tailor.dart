@@ -12,6 +12,7 @@ part of 'widget_toolkit_theme.dart';
 mixin _$WidgetToolkitThemeTailorMixin on ThemeExtension<WidgetToolkitTheme> {
   DesignSystemSpacings get spacings;
   DesignSystemTypography get typography;
+  DesignSystemColors get colors;
   Color get loadingIndicatorColor;
   Color get buttonBackgroundColor;
   Color get buttonForegroundColor;
@@ -35,11 +36,13 @@ mixin _$WidgetToolkitThemeTailorMixin on ThemeExtension<WidgetToolkitTheme> {
   Color get bottomSheetLineColor;
   EdgeInsetsGeometry get bottomSheetHeaderPadding;
   double get bottomSheetBottomHeight;
+  double get bottomSheetTopRadius;
 
   @override
   WidgetToolkitTheme copyWith({
     DesignSystemSpacings? spacings,
     DesignSystemTypography? typography,
+    DesignSystemColors? colors,
     Color? loadingIndicatorColor,
     Color? buttonBackgroundColor,
     Color? buttonForegroundColor,
@@ -63,10 +66,12 @@ mixin _$WidgetToolkitThemeTailorMixin on ThemeExtension<WidgetToolkitTheme> {
     Color? bottomSheetLineColor,
     EdgeInsetsGeometry? bottomSheetHeaderPadding,
     double? bottomSheetBottomHeight,
+    double? bottomSheetTopRadius,
   }) {
     return WidgetToolkitTheme(
       spacings: spacings ?? this.spacings,
       typography: typography ?? this.typography,
+      colors: colors ?? this.colors,
       loadingIndicatorColor:
           loadingIndicatorColor ?? this.loadingIndicatorColor,
       buttonBackgroundColor:
@@ -102,6 +107,7 @@ mixin _$WidgetToolkitThemeTailorMixin on ThemeExtension<WidgetToolkitTheme> {
           bottomSheetHeaderPadding ?? this.bottomSheetHeaderPadding,
       bottomSheetBottomHeight:
           bottomSheetBottomHeight ?? this.bottomSheetBottomHeight,
+      bottomSheetTopRadius: bottomSheetTopRadius ?? this.bottomSheetTopRadius,
     );
   }
 
@@ -114,6 +120,7 @@ mixin _$WidgetToolkitThemeTailorMixin on ThemeExtension<WidgetToolkitTheme> {
     return WidgetToolkitTheme(
       spacings: t < 0.5 ? spacings : other.spacings,
       typography: t < 0.5 ? typography : other.typography,
+      colors: t < 0.5 ? colors : other.colors,
       loadingIndicatorColor: Color.lerp(
         loadingIndicatorColor,
         other.loadingIndicatorColor,
@@ -209,6 +216,9 @@ mixin _$WidgetToolkitThemeTailorMixin on ThemeExtension<WidgetToolkitTheme> {
       bottomSheetBottomHeight: t < 0.5
           ? bottomSheetBottomHeight
           : other.bottomSheetBottomHeight,
+      bottomSheetTopRadius: t < 0.5
+          ? bottomSheetTopRadius
+          : other.bottomSheetTopRadius,
     );
   }
 
@@ -222,6 +232,7 @@ mixin _$WidgetToolkitThemeTailorMixin on ThemeExtension<WidgetToolkitTheme> {
               typography,
               other.typography,
             ) &&
+            const DeepCollectionEquality().equals(colors, other.colors) &&
             const DeepCollectionEquality().equals(
               loadingIndicatorColor,
               other.loadingIndicatorColor,
@@ -313,6 +324,10 @@ mixin _$WidgetToolkitThemeTailorMixin on ThemeExtension<WidgetToolkitTheme> {
             const DeepCollectionEquality().equals(
               bottomSheetBottomHeight,
               other.bottomSheetBottomHeight,
+            ) &&
+            const DeepCollectionEquality().equals(
+              bottomSheetTopRadius,
+              other.bottomSheetTopRadius,
             ));
   }
 
@@ -322,6 +337,7 @@ mixin _$WidgetToolkitThemeTailorMixin on ThemeExtension<WidgetToolkitTheme> {
       runtimeType.hashCode,
       const DeepCollectionEquality().hash(spacings),
       const DeepCollectionEquality().hash(typography),
+      const DeepCollectionEquality().hash(colors),
       const DeepCollectionEquality().hash(loadingIndicatorColor),
       const DeepCollectionEquality().hash(buttonBackgroundColor),
       const DeepCollectionEquality().hash(buttonForegroundColor),
@@ -345,6 +361,7 @@ mixin _$WidgetToolkitThemeTailorMixin on ThemeExtension<WidgetToolkitTheme> {
       const DeepCollectionEquality().hash(bottomSheetLineColor),
       const DeepCollectionEquality().hash(bottomSheetHeaderPadding),
       const DeepCollectionEquality().hash(bottomSheetBottomHeight),
+      const DeepCollectionEquality().hash(bottomSheetTopRadius),
     ]);
   }
 }

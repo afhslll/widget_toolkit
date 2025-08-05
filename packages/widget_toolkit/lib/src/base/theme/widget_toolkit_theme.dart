@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:theme_tailor_annotation/theme_tailor_annotation.dart';
 
 import 'design_system/design_system_spacings.dart';
+import 'design_system/design_system_colors.dart';
 import 'design_system/design_system_typography.dart';
 import 'design_system/widget_toolkit_design_system.dart';
 
@@ -14,6 +15,8 @@ class WidgetToolkitTheme extends ThemeExtension<WidgetToolkitTheme>
   final DesignSystemSpacings spacings;
   @override
   final DesignSystemTypography typography;
+  @override
+  final DesignSystemColors colors;
   @override
   final Color loadingIndicatorColor;
   // Start region - button
@@ -67,10 +70,14 @@ class WidgetToolkitTheme extends ThemeExtension<WidgetToolkitTheme>
   final EdgeInsetsGeometry bottomSheetHeaderPadding;
   @override
   final double bottomSheetBottomHeight;
+  @override
+  final double bottomSheetTopRadius;
   // End region - bottom sheet
 
   const WidgetToolkitTheme({
     required this.typography,
+    required this.colors,
+    required this.spacings,
     required this.buttonBackgroundColor,
     required this.buttonForegroundColor,
     required this.buttonDisabledBackgroundColor,
@@ -82,7 +89,6 @@ class WidgetToolkitTheme extends ThemeExtension<WidgetToolkitTheme>
     required this.buttonElevation,
     required this.buttonPadding,
     required this.buttonIconSize,
-    required this.spacings,
     required this.loadingIndicatorColor,
     required this.shimmerBaseColor,
     required this.shimmerHighlightColor,
@@ -95,11 +101,13 @@ class WidgetToolkitTheme extends ThemeExtension<WidgetToolkitTheme>
     required this.bottomSheetLineColor,
     required this.bottomSheetHeaderPadding,
     required this.bottomSheetBottomHeight,
+    required this.bottomSheetTopRadius,
   });
 
   WidgetToolkitTheme.light()
     : spacings = WidgetToolkitDesignSystem.light().spacings,
       typography = WidgetToolkitDesignSystem.light().typography,
+      colors = WidgetToolkitDesignSystem.light().colors,
       buttonBackgroundColor = WidgetToolkitDesignSystem.light().colors.primary,
       buttonForegroundColor =
           WidgetToolkitDesignSystem.light().colors.onPrimary,
@@ -134,14 +142,15 @@ class WidgetToolkitTheme extends ThemeExtension<WidgetToolkitTheme>
       ),
       bottomSheetLineColor = WidgetToolkitDesignSystem.light().colors.neutral40,
       bottomSheetHeaderPadding = EdgeInsets.symmetric(
-        horizontal: WidgetToolkitDesignSystem.light().spacings.m,
         vertical: WidgetToolkitDesignSystem.light().spacings.s,
       ),
-      bottomSheetBottomHeight = WidgetToolkitDesignSystem.light().spacings.m;
+      bottomSheetBottomHeight = WidgetToolkitDesignSystem.light().spacings.m,
+      bottomSheetTopRadius = WidgetToolkitDesignSystem.light().spacings.m;
 
   WidgetToolkitTheme.dark()
     : spacings = WidgetToolkitDesignSystem.dark().spacings,
       typography = WidgetToolkitDesignSystem.dark().typography,
+      colors = WidgetToolkitDesignSystem.dark().colors,
       buttonBackgroundColor = WidgetToolkitDesignSystem.dark().colors.primary,
       buttonForegroundColor = WidgetToolkitDesignSystem.dark().colors.onPrimary,
       buttonDisabledBackgroundColor =
@@ -165,7 +174,6 @@ class WidgetToolkitTheme extends ThemeExtension<WidgetToolkitTheme>
           WidgetToolkitDesignSystem.dark().colors.surface,
       errorCardIconColor = WidgetToolkitDesignSystem.dark().colors.error,
       errorCardTextColor = WidgetToolkitDesignSystem.dark().colors.onSurface,
-
       bottomSheetBarrierColor =
           WidgetToolkitDesignSystem.dark().colors.transparent,
       bottomSheetBackgroundColor =
@@ -175,10 +183,10 @@ class WidgetToolkitTheme extends ThemeExtension<WidgetToolkitTheme>
       ),
       bottomSheetLineColor = WidgetToolkitDesignSystem.dark().colors.neutral40,
       bottomSheetHeaderPadding = EdgeInsets.symmetric(
-        horizontal: WidgetToolkitDesignSystem.dark().spacings.m,
         vertical: WidgetToolkitDesignSystem.dark().spacings.s,
       ),
-      bottomSheetBottomHeight = WidgetToolkitDesignSystem.dark().spacings.m;
+      bottomSheetBottomHeight = WidgetToolkitDesignSystem.dark().spacings.m,
+      bottomSheetTopRadius = WidgetToolkitDesignSystem.dark().spacings.m;
 }
 
 extension ThemeContextExtension on BuildContext {

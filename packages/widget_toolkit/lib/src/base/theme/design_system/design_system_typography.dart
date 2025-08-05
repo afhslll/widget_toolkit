@@ -89,31 +89,31 @@ class DesignSystemTypography {
   final bodyRegL = const TextStyle(
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
-    fontSize: 14.0,
+    fontSize: 20.0,
   );
 
   final bodyRegM = const TextStyle(
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
-    fontSize: 12.0,
+    fontSize: 16.0,
   );
 
   final bodyRegS = const TextStyle(
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
-    fontSize: 10.0,
+    fontSize: 12.0,
   );
 
   final labelMedL = const TextStyle(
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
-    fontSize: 14.0,
+    fontSize: 15.0,
   );
 
   final labelMedM = const TextStyle(
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
-    fontSize: 12.0,
+    fontSize: 13.0,
   );
 
   final labelMedS = const TextStyle(
