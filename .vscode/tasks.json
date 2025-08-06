@@ -1,0 +1,132 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Sync translations",
+      "type": "shell",
+      "command": "python3",
+      "group": "build",
+      "args": ["./bin/sync_translations.py"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build Runner - Generate Code",
+      "type": "shell",
+      "command": "dart",
+      "args": ["run", "build_runner", "build", "--delete-conflicting-outputs"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build Runner - Watch Mode",
+      "type": "shell",
+      "command": "dart",
+      "args": ["run", "build_runner", "watch", "--delete-conflicting-outputs"],
+      "group": "build",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build Runner - Clean",
+      "type": "shell",
+      "command": "dart",
+      "args": ["run", "build_runner", "clean"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Patrol Tests - Development",
+      "type": "shell",
+      "command": "patrol",
+      "args": ["test", "--flavor", "development", "--dart-define", "flavor=development", "--show-flutter-logs"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Golden test",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["test", "--update-goldens"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "ADB Reverse Port Forward",
+      "type": "shell",
+      "command": "adb",
+      "args": ["reverse", "tcp:54321", "tcp:54321"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    }
+  ]
+}
