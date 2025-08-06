@@ -1,11 +1,7 @@
-import 'package:mockito/annotations.dart';
-
 import '../../helpers/golden_helper.dart';
 import '../factory/item_picker_factory.dart';
-import '../services/item_picker_service_mock.dart';
 import '../stubs.dart';
 
-@GenerateMocks([ItemPickerServiceMock])
 void main() {
   runGoldenTests([
     buildScenario(

@@ -2,9 +2,7 @@ import 'package:rx_bloc/rx_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:widget_toolkit/widget_toolkit.dart';
 
-import '../../../../otp.dart';
 import '../../countdown_widget/services/countdown_service.dart';
-import '../services/sms_code_service.dart';
 
 part 'sms_code_bloc.rxb.g.dart';
 part 'sms_code_bloc_extensions.dart';
@@ -88,7 +86,7 @@ class SmsCodeBloc extends $SmsCodeBloc {
        _countDownService = countdownService,
        _initialPhoneNumber = initialPhoneNumber {
     if (_initialPhoneNumber != null) {
-      _number.add(_initialPhoneNumber!);
+      _number.add(_initialPhoneNumber);
     } else {
       _$getPhoneNumberEvent
           .startWith(null)
