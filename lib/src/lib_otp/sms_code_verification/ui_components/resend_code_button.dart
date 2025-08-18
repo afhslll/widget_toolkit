@@ -200,6 +200,7 @@ class ResendCodeButton extends StatelessWidget {
     dynamic pressedStateIcon,
     dynamic disabledStateIcon,
   }) => ToolkitButton(
+    key: key,
     state: currentState,
     leadingIcon: Icons.send,
     style: buttonColorStyle,

@@ -264,6 +264,7 @@ class _ToolkitButtonState extends State<ToolkitButton> {
         );
       },
       child: ElevatedButton(
+        key: widget.key,
         onPressed:
             widget.state == ToolkitButtonState.disabled ||
                 widget.state == ToolkitButtonState.loading

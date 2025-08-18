@@ -49,9 +49,8 @@ class ItemPickerTheme extends ThemeExtension<ItemPickerTheme>
 
   ItemPickerTheme.light()
     : contentListPadding = EdgeInsets.zero,
-      titlePadding = EdgeInsets.only(
-        bottom: WidgetToolkitDesignSystem.light().spacings.m,
-        left: WidgetToolkitDesignSystem.light().spacings.xs,
+      titlePadding = EdgeInsets.symmetric(
+        vertical: WidgetToolkitDesignSystem.light().spacings.m,
       ),
       titleTextStyle = WidgetToolkitDesignSystem.light().typography.titleMedM,
       errorPadding = EdgeInsets.zero,
@@ -73,9 +72,8 @@ class ItemPickerTheme extends ThemeExtension<ItemPickerTheme>
       itemBorderRadius = WidgetToolkitDesignSystem.light().spacings.s;
 
   ItemPickerTheme.dark()
-    : titlePadding = EdgeInsets.only(
-        bottom: WidgetToolkitDesignSystem.dark().spacings.m,
-        left: WidgetToolkitDesignSystem.dark().spacings.xs,
+    : titlePadding = EdgeInsets.symmetric(
+        vertical: WidgetToolkitDesignSystem.light().spacings.m,
       ),
       titleTextStyle = WidgetToolkitDesignSystem.dark().typography.titleMedM,
       errorPadding = EdgeInsets.zero,
