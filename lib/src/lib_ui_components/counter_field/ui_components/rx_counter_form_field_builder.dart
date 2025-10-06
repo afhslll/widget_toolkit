@@ -58,6 +58,7 @@ class RxCounterFormFieldBuilderState<B extends RxBlocTypeBase>
           widget.onChanged(bloc, 0);
         } else {
           _currentValue = newValue;
+          widget.onChanged(bloc, newValue);
         }
       }
     });
