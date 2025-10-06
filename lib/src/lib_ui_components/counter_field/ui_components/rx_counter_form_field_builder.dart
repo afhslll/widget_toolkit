@@ -1,7 +1,7 @@
 part of '../../../base/common_ui_components/rx_form_field_builder.dart';
 
-typedef RxCounterFormFieldBuilderFunction<B extends RxBlocTypeBase> = Widget
-    Function(RxCounterFormFieldBuilderState<B> fieldState);
+typedef RxCounterFormFieldBuilderFunction<B extends RxBlocTypeBase> =
+    Widget Function(RxCounterFormFieldBuilderState<B> fieldState);
 
 class RxCounterFormFieldBuilder<B extends RxBlocTypeBase>
     extends RxFormFieldBuilder<B, int> {
@@ -15,10 +15,8 @@ class RxCounterFormFieldBuilder<B extends RxBlocTypeBase>
     this.controller,
     this.decorationData = const RxInputDecorationData(),
     this.cursorBehaviour = RxTextFormFieldCursorBehaviour.start,
-  })  : counterFormBuilder = builder,
-        super(
-          builder: (_) => const SizedBox(),
-        );
+  }) : counterFormBuilder = builder,
+       super(builder: (_) => const SizedBox());
   final RxFormFieldOnChanged<B, int> onChanged;
   final RxCounterFormFieldBuilderFunction<B> counterFormBuilder;
   final TextEditingController? controller;
@@ -53,18 +51,23 @@ class RxCounterFormFieldBuilderState<B extends RxBlocTypeBase>
 
     controller.addListener(() {
       if (controller.text.isNotEmpty) {
-        _currentValue = int.tryParse(controller.text) ?? 0;
+        final newValue = int.tryParse(controller.text);
+        if (newValue == null) {
+          controller.clear();
+          _currentValue = 0;
+          widget.onChanged(bloc, 0);
+        } else {
+          _currentValue = newValue;
+        }
       }
     });
 
     (_blocState as Stream<int>)
         .where((event) => event != int.tryParse(controller.text))
-        .listen(
-      (event) {
-        _onBlocStateEvent(event.toString());
-      },
-      onError: (exception) {},
-    ).addTo(_compositeSubscription);
+        .listen((event) {
+          _onBlocStateEvent(event.toString());
+        }, onError: (exception) {})
+        .addTo(_compositeSubscription);
   }
 
   void _onBlocStateEvent(String newValue) {
