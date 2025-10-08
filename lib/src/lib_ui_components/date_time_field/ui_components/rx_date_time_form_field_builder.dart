@@ -1,7 +1,7 @@
 part of '../../../base/common_ui_components/rx_form_field_builder.dart';
 
-typedef RxDateTimeFormFieldBuilderFunction<B extends RxBlocTypeBase> = Widget
-    Function(RxDateTimeFormFieldBuilderState<B> fieldState);
+typedef RxDateTimeFormFieldBuilderFunction<B extends RxBlocTypeBase> =
+    Widget Function(RxDateTimeFormFieldBuilderState<B> fieldState);
 
 class RxDateTimeFormFieldBuilder<B extends RxBlocTypeBase>
     extends RxFormFieldBuilder<B, DateTime?> {
@@ -18,10 +18,8 @@ class RxDateTimeFormFieldBuilder<B extends RxBlocTypeBase>
     this.cursorBehaviour = RxTextFormFieldCursorBehaviour.start,
     this.dateFormat,
     this.showReset = false,
-  })  : dateTimeFormBuilder = builder,
-        super(
-          builder: (_) => const SizedBox(),
-        );
+  }) : dateTimeFormBuilder = builder,
+       super(builder: (_) => const SizedBox());
   final DateTimeInputType inputType;
   final RxFormFieldOnChanged<B, DateTime?> onChanged;
   final RxDateTimeFormFieldBuilderFunction<B> dateTimeFormBuilder;
@@ -37,8 +35,8 @@ class RxDateTimeFormFieldBuilder<B extends RxBlocTypeBase>
 }
 
 class RxDateTimeFormFieldBuilderState<B extends RxBlocTypeBase>
-    extends RxFormFieldBuilderState<B, DateTime?,
-        RxDateTimeFormFieldBuilder<B>> {
+    extends
+        RxFormFieldBuilderState<B, DateTime?, RxDateTimeFormFieldBuilder<B>> {
   late final TextEditingController textController =
       widget.textController ?? TextEditingController();
 
@@ -65,22 +63,22 @@ class RxDateTimeFormFieldBuilderState<B extends RxBlocTypeBase>
       widget.onChanged(bloc, controller.value);
     });
 
-    (_blocState).listen(
-      (event) {
-        if (event == null) {
-          textController.clear();
-          setState(() {
-            showReset = false;
-          });
-        } else if (_getFormattedDateTime(event) != textController.text) {
-          setState(() {
-            showReset = true && widget.showReset;
-          });
-          _onBlocStateEvent(_getFormattedDateTime(event));
-        }
-      },
-      onError: (exception) {},
-    ).addTo(_compositeSubscription);
+    (_blocState)
+        .listen((event) {
+          controller.value = event;
+          if (event == null) {
+            textController.clear();
+            setState(() {
+              showReset = false;
+            });
+          } else if (_getFormattedDateTime(event) != textController.text) {
+            setState(() {
+              showReset = true && widget.showReset;
+            });
+            _onBlocStateEvent(_getFormattedDateTime(event));
+          }
+        }, onError: (exception) {})
+        .addTo(_compositeSubscription);
   }
 
   void _onBlocStateEvent(String newValue) {
@@ -150,7 +148,7 @@ class RxDateTimeFormFieldBuilderState<B extends RxBlocTypeBase>
       case DateTimeInputType.time:
         return DateFormat.Hm();
       case DateTimeInputType.date:
-        return DateFormat('dd-MM-yyyy');
+        return DateFormat('dd MMM yyyy');
       case DateTimeInputType.both:
         return DateFormat.yMd().add_Hms();
     }

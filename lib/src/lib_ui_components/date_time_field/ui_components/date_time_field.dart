@@ -40,6 +40,11 @@ class _DateTimeFieldState extends State<DateTimeField> {
       _value = widget.initialValue;
       widget.controller?.value = _value!;
     }
+    widget.controller?.addListener(() {
+      setState(() {
+        _value = widget.controller?.value;
+      });
+    });
     super.initState();
   }
 
@@ -84,7 +89,8 @@ class _DateTimeFieldState extends State<DateTimeField> {
     return showDatePicker(
       context: context,
       initialDate: _value,
-      firstDate: widget.firstDate ??
+      firstDate:
+          widget.firstDate ??
           DateTime.now().subtract(const Duration(days: 365 * 70)),
       lastDate:
           widget.lastDate ?? DateTime.now().add(const Duration(days: 365 * 5)),
@@ -105,6 +111,8 @@ class _DateTimeFieldState extends State<DateTimeField> {
         height: 250,
         child: CupertinoDatePicker(
           initialDateTime: _value,
+          minimumDate: widget.firstDate,
+          maximumDate: widget.lastDate,
           mode: getPickerMode(),
           onDateTimeChanged: (value) {
             _value = value;
@@ -129,7 +137,12 @@ class _DateTimeFieldState extends State<DateTimeField> {
   }
 
   DateTime combine(DateTime date, TimeOfDay? time) => DateTime(
-      date.year, date.month, date.day, time?.hour ?? 0, time?.minute ?? 0);
+    date.year,
+    date.month,
+    date.day,
+    time?.hour ?? 0,
+    time?.minute ?? 0,
+  );
 
   DateTime? convert(TimeOfDay? time) =>
       time == null ? null : DateTime(1, 1, 1, time.hour, time.minute);

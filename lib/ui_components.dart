@@ -11,3 +11,4 @@ export 'src/lib_ui_components/item_picker_field/ui_components/item_picker_field.
 export 'src/lib_ui_components/sized_loading_indicator.dart';
 export 'src/lib_ui_components/error_card_widget.dart';
 export 'src/lib_ui_components/show_blurred_bottom_sheet.dart';
+export 'src/lib_ui_components/counter_field/models/counter_option.dart';

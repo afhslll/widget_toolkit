@@ -12,14 +12,15 @@ part '../../lib_ui_components/text_field/ui_components/rx_text_form_field_builde
 part '../../lib_ui_components/date_time_field/ui_components/rx_date_time_form_field_builder.dart';
 part '../../lib_ui_components/counter_field/ui_components/rx_counter_form_field_builder.dart';
 part '../../lib_ui_components/item_picker_field/ui_components/rx_item_picker_form_field_builder.dart';
+part '../../lib_ui_components/counter_field/ui_components/rx_counter_option_form_field_builder.dart';
 
 /// Type used as a contract for defining the RxFormFieldBuilder state
 typedef RxFormFieldState<B extends RxBlocTypeBase, T> = Stream<T> Function(B);
 
 /// Contract type used for defining a RxFormFieldBuilder state which toggles the
 /// visibility of errors
-typedef RxFormFieldShowError<B extends RxBlocTypeBase> = Stream<bool> Function(
-    B);
+typedef RxFormFieldShowError<B extends RxBlocTypeBase> =
+    Stream<bool> Function(B);
 
 /// Contract defining the callback which is triggered once a change in the
 /// RxFormFieldBuilder happens
@@ -28,9 +29,10 @@ typedef RxFormFieldOnChanged<B extends RxBlocTypeBase, T> = void Function(B, T);
 /// Contract defining a builder function which will be triggered once a change
 /// in the RxFormFieldBuilder state is detected returning a new widget as
 /// a result
-typedef RxFormFieldBuilderFunction<B extends RxBlocTypeBase, T>
-    = Widget Function(
-        RxFormFieldBuilderState<B, T, RxFormFieldBuilder<B, T>> fieldState);
+typedef RxFormFieldBuilderFunction<B extends RxBlocTypeBase, T> =
+    Widget Function(
+      RxFormFieldBuilderState<B, T, RxFormFieldBuilder<B, T>> fieldState,
+    );
 
 ///   [RxFormFieldBuilder] is a convenience widget,
 /// which makes it easier to build and update responsive form fields
@@ -213,8 +215,12 @@ class RxFormFieldBuilder<B extends RxBlocTypeBase, T> extends StatefulWidget {
 /// showing errors to the user.
 ///
 ///   !The showErrorState stream must never emmit an error
-class RxFormFieldBuilderState<B extends RxBlocTypeBase, T,
-    R extends RxFormFieldBuilder<B, T>> extends State<R> {
+class RxFormFieldBuilderState<
+  B extends RxBlocTypeBase,
+  T,
+  R extends RxFormFieldBuilder<B, T>
+>
+    extends State<R> {
   late B _bloc;
   late Stream<T?> _blocState;
   late Stream<bool> _showErrorState;
@@ -260,34 +266,41 @@ class RxFormFieldBuilderState<B extends RxBlocTypeBase, T,
     _blocState = widget.state(_bloc);
     _showErrorState = widget.showErrorState(_bloc);
 
-    _blocState.listen((value) {
-      setState(() {
-        _error = null;
-        _value = value;
-      });
-    }, onError: (exception) {
-      assert(
-        exception is rx_form.RxFieldException<T>,
-        'Actual: Exception is [${exception.runtimeType}], '
-        '${exception.toString()} \n'
-        'Exceptions thrown by the state stream of [RxFormFieldBuilder<T>] '
-        'should be of type [RxFieldException<T>] where T is the same T passed '
-        'to [RxFormFieldBuilder<T>].',
-      );
+    _blocState
+        .listen(
+          (value) {
+            setState(() {
+              _error = null;
+              _value = value;
+            });
+          },
+          onError: (exception) {
+            assert(
+              exception is rx_form.RxFieldException<T>,
+              'Actual: Exception is [${exception.runtimeType}], '
+              '${exception.toString()} \n'
+              'Exceptions thrown by the state stream of [RxFormFieldBuilder<T>] '
+              'should be of type [RxFieldException<T>] where T is the same T passed '
+              'to [RxFormFieldBuilder<T>].',
+            );
 
-      if (exception is rx_form.RxFieldException<T>) {
-        setState(() {
-          _value = exception.fieldValue;
-          _error = exception.error;
-        });
-      }
-    }).addTo(_compositeSubscription);
+            if (exception is rx_form.RxFieldException<T>) {
+              setState(() {
+                _value = exception.fieldValue;
+                _error = exception.error;
+              });
+            }
+          },
+        )
+        .addTo(_compositeSubscription);
 
-    _showErrorState.listen((event) {
-      setState(() {
-        _showError = event;
-      });
-    }).addTo(_compositeSubscription);
+    _showErrorState
+        .listen((event) {
+          setState(() {
+            _showError = event;
+          });
+        })
+        .addTo(_compositeSubscription);
   }
 
   @override

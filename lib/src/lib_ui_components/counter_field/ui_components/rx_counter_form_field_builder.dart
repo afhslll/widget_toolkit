@@ -37,7 +37,6 @@ class RxCounterFormFieldBuilderState<B extends RxBlocTypeBase>
   InputDecoration get decoration => _decoration;
 
   late final bool _shouldDisposeController = widget.controller == null;
-  int _currentValue = 0;
 
   @override
   void initState() {
@@ -51,20 +50,19 @@ class RxCounterFormFieldBuilderState<B extends RxBlocTypeBase>
 
     controller.addListener(() {
       if (controller.text.isNotEmpty) {
-        final newValue = int.tryParse(controller.text);
-        if (newValue == null) {
+        final newValue = int.tryParse(controller.text) ?? 0;
+        if (newValue == 0) {
           controller.clear();
-          _currentValue = 0;
-          widget.onChanged(bloc, 0);
-        } else {
-          _currentValue = newValue;
+        }
+        if (newValue != _value) {
           widget.onChanged(bloc, newValue);
         }
+        _value = newValue;
       }
     });
 
     (_blocState as Stream<int>)
-        .where((event) => event != int.tryParse(controller.text))
+        .where((event) => event != (int.tryParse(controller.text) ?? 0))
         .listen((event) {
           _onBlocStateEvent(event.toString());
         }, onError: (exception) {})
@@ -113,14 +111,14 @@ class RxCounterFormFieldBuilderState<B extends RxBlocTypeBase>
       InputDecoration(
         prefixIcon: IconButton(
           onPressed: () {
-            final newValue = _currentValue - 1;
+            final newValue = (_value ?? 0) - 1;
             widget.onChanged(bloc, newValue);
           },
           icon: widget.decorationData.iconCounterDecrement,
         ),
         suffixIcon: IconButton(
           onPressed: () {
-            final newValue = _currentValue + 1;
+            final newValue = (_value ?? 0) + 1;
             widget.onChanged(bloc, newValue);
           },
           icon: widget.decorationData.iconCounterIncrement,
