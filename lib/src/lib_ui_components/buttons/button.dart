@@ -8,7 +8,7 @@ class ToolkitButton extends StatefulWidget {
   const ToolkitButton({
     super.key,
     required this.text,
-    required this.onPressed,
+    this.onPressed,
     this.leadingIcon,
     this.trailingIcon,
     this.style,
@@ -20,12 +20,12 @@ class ToolkitButton extends StatefulWidget {
   final IconData? trailingIcon;
   final ToolkitButtonStyle? style;
   final ToolkitButtonState state;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   factory ToolkitButton.outlined(
     BuildContext context, {
     required String text,
-    required VoidCallback onPressed,
+    VoidCallback? onPressed,
     IconData? leadingIcon,
     IconData? trailingIcon,
     ToolkitButtonStyle? style,
@@ -268,7 +268,7 @@ class _ToolkitButtonState extends State<ToolkitButton> {
         onPressed:
             widget.state == ToolkitButtonState.disabled ||
                 widget.state == ToolkitButtonState.loading
-            ? () {}
+            ? null
             : widget.onPressed,
         statesController: _statesController,
         style: _noBackgroundStyle(context),
