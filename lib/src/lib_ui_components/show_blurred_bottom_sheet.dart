@@ -46,6 +46,7 @@ Future<T?> showBlurredBottomSheet<T>({
     isDismissible: configuration.isDismissible,
     enableDrag: configuration.isDismissible,
     elevation: 0,
+    useRootNavigator: configuration.useRootNavigator,
     builder: (context) => TweenAnimationBuilder<double>(
       builder: (context, sigma, child) {
         // According to this issue: https://stackoverflow.com/a/68891725
@@ -224,6 +225,7 @@ class ModalConfiguration {
     this.isDismissible = true,
     this.haveOnlyOneSheet = true,
     this.contentAlignment,
+    this.useRootNavigator = false,
   });
 
   /// If [fullScreen] is true, this flag ignores the [heightFactor] and calculate
@@ -259,6 +261,8 @@ class ModalConfiguration {
 
   /// Alignment of the content within the modal sheet
   final MainAxisAlignment? contentAlignment;
+
+  final bool useRootNavigator;
 }
 
 double _calculateFullScreenRatio(BuildContext context) {
