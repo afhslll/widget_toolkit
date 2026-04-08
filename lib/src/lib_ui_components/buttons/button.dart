@@ -268,7 +268,7 @@ class _ToolkitButtonState extends State<ToolkitButton> {
         onPressed:
             widget.state == ToolkitButtonState.disabled ||
                 widget.state == ToolkitButtonState.loading
-            ? null
+            ? () {}
             : widget.onPressed,
         statesController: _statesController,
         style: _noBackgroundStyle(context),
