@@ -99,5 +99,6 @@ class ItemPickerModalConfiguration extends ModalConfiguration {
     super.heightFactor,
     super.dialogHasBottomPadding = true,
     super.isDismissible = true,
+    super.useRootNavigator = false,
   });
 }
